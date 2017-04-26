@@ -13,7 +13,6 @@ Package.onUse(function (api) {
     'vulcan:voting',
     'vulcan:accounts',
     'vulcan:categories',
-    'vulcan:embedly',
     'vulcan:forms',
 
     'vulcan:base-styles',
@@ -22,11 +21,7 @@ Package.onUse(function (api) {
     'fourseven:scss',
   ])
 
-  api.addFiles([
-    'lib/stylesheets/custom.scss'
-  ], ['client']);
-
-  api.mainModule("lib/server.js", "server");
-  api.mainModule("lib/client.js", "client");
+  api.mainModule("lib/server/index.js", "server");
+  api.mainModule("lib/client/index.js", "client");
 
 })

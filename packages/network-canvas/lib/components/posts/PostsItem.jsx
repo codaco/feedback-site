@@ -23,7 +23,7 @@ class PostsItem extends Component {
       </div>
     )
   }
-  
+
   render() {
 
     const {post} = this.props;
@@ -37,8 +37,6 @@ class PostsItem extends Component {
         <div className="posts-item-vote">
           <Components.Vote collection={Posts} document={post} currentUser={this.props.currentUser}/>
         </div>
-
-        {post.thumbnailUrl ? <Components.PostsThumbnail post={post}/> : null}
 
         <div className="posts-item-content">
 

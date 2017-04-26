@@ -4,6 +4,29 @@ import React, { PropTypes, Component } from 'react';
 import { intlShape } from 'react-intl';
 import { withRouter } from 'react-router'
 
+const formSchema = {
+  title: {
+    type: String,
+    optional: false,
+    max: 500,
+    viewableBy: ['guests'],
+    insertableBy: ['members'],
+    editableBy: ['members'],
+    control: "text",
+    order: 20
+  },
+  body: {
+    type: String,
+    optional: true,
+    max: 3000,
+    viewableBy: ['guests'],
+    insertableBy: ['members'],
+    editableBy: ['members'],
+    control: "textarea",
+    order: 30
+  },
+}
+
 const PostsNewForm = (props, context) =>
   <Components.ShowIf
       check={Posts.options.mutations.new.check}
@@ -12,6 +35,7 @@ const PostsNewForm = (props, context) =>
       <div className="posts-new-form">
         <Components.SmartForm
           collection={Posts}
+          schema={formSchema}
           mutationFragment={getFragment('PostsPage')}
           successCallback={post => {
             props.closeModal();

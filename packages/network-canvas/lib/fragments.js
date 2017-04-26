@@ -110,8 +110,6 @@ registerFragment(`
     user {
       ...UsersMinimumInfo
     }
-    # vulcan:embedly
-    thumbnailUrl
     # vulcan:categories
     categories {
       ...CategoriesMinimumInfo

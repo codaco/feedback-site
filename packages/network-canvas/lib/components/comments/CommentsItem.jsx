@@ -3,29 +3,16 @@ import React, { PropTypes, Component } from 'react';
 import { intlShape, FormattedMessage, FormattedRelative } from 'react-intl';
 import Comments from 'meteor/vulcan:comments';
 
-class CommentsItem extends Component{
+class CommentsItem extends Component {
 
   constructor() {
     super();
-    ['showReply', 'replyCancelCallback', 'replySuccessCallback', 'showEdit', 'editCancelCallback', 'editSuccessCallback', 'removeSuccessCallback'].forEach(methodName => {this[methodName] = this[methodName].bind(this)});
+    ['showEdit', 'editCancelCallback', 'editSuccessCallback', 'removeSuccessCallback'].forEach(methodName => {
+      this[methodName] = this[methodName].bind(this)
+    });
     this.state = {
-      showReply: false,
       showEdit: false
     };
-  }
-
-  showReply(event) {
-    event.preventDefault();
-    this.setState({showReply: true});
-  }
-
-  replyCancelCallback(event) {
-    event.preventDefault();
-    this.setState({showReply: false});
-  }
-
-  replySuccessCallback() {
-    this.setState({showReply: false});
   }
 
   showEdit(event) {
@@ -52,36 +39,14 @@ class CommentsItem extends Component{
   renderComment() {
     const htmlBody = {__html: this.props.comment.htmlBody};
 
-    const showReplyButton = !this.props.comment.isDeleted && !!this.props.currentUser;
-
     return (
       <div className="comments-item-text">
         <div dangerouslySetInnerHTML={htmlBody}></div>
-        { showReplyButton ?
-          <a className="comments-item-reply-link" onClick={this.showReply}>
-            <Components.Icon name="reply"/> <FormattedMessage id="comments.reply"/>
-          </a> : null}
-      </div>
-    )
-  }
-
-  renderReply() {
-
-    return (
-      <div className="comments-item-reply">
-        <Components.CommentsNewForm
-          postId={this.props.comment.postId}
-          parentComment={this.props.comment}
-          successCallback={this.replySuccessCallback}
-          cancelCallback={this.replyCancelCallback}
-          type="reply"
-        />
       </div>
     )
   }
 
   renderEdit() {
-
     return (
       <Components.CommentsEditForm
         comment={this.props.comment}
@@ -113,7 +78,6 @@ class CommentsItem extends Component{
           </div>
           {this.state.showEdit ? this.renderEdit() : this.renderComment()}
         </div>
-        {this.state.showReply ? this.renderReply() : null}
       </div>
     )
   }
