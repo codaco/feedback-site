@@ -11,6 +11,7 @@ const PostsListHeader = () => {
         </div>
         <Components.PostsViews />
         <Components.SearchForm/>
+        <Components.PostsNewButton/>
       </div>
     </div>
   )

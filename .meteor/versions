@@ -1,6 +1,7 @@
 accounts-base@1.2.16
 accounts-password@1.3.5
 allow-deny@1.0.5
+artwells-accounts-guest@0.1.13_1
 autoupdate@1.3.12
 babel-compiler@6.18.1
 babel-runtime@1.0.1
@@ -9,7 +10,10 @@ binary-heap@1.0.10
 blaze@2.3.2
 blaze-tools@1.0.10
 boilerplate-generator@1.0.11
+brettle:accounts-login-state@0.0.4
+brettle:accounts-patch-ui@0.1.3
 caching-compiler@1.1.9
+caching-html-compiler@1.0.7
 callback-hook@1.0.10
 check@1.2.5
 ddp@1.2.5
@@ -69,6 +73,8 @@ srp@1.0.10
 standard-minifier-css@1.3.4
 standard-minifier-js@1.2.3
 standard-minifiers@1.0.6
+templating@1.1.14
+templating-tools@1.0.5
 tracker@1.1.2
 ui@1.0.13
 underscore@1.0.10

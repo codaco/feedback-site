@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "moniker": {
+      "version": "0.1.2",
+      "resolved": "https://registry.npmjs.org/moniker/-/moniker-0.1.2.tgz",
+      "from": "moniker@0.1.2"
+    }
+  }
+}

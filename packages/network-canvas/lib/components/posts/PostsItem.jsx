@@ -48,7 +48,6 @@ class PostsItem extends Component {
           </h3>
 
           <div className="posts-item-meta">
-            {post.user? <div className="posts-item-user"><Components.UsersAvatar user={post.user} size="small"/><Components.UsersName user={post.user}/></div> : null}
             <div className="posts-item-date">{post.postedAt ? <FormattedRelative value={post.postedAt}/> : <FormattedMessage id="posts.dateNotDefined"/>}</div>
             <div className="posts-item-comments">
               <Link to={Posts.getPageUrl(post)}>

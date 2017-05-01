@@ -21,9 +21,6 @@ class UsersMenu extends Component {
             <div>{Users.getDisplayName(currentUser)}</div>
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <LinkContainer to={`/users/${currentUser.slug}`}>
-              <MenuItem className="dropdown-item" eventKey="1"><FormattedMessage id="users.profile"/></MenuItem>
-            </LinkContainer>
             <LinkContainer to={`/account`}>
               <MenuItem className="dropdown-item" eventKey="2"><FormattedMessage id="users.edit_account"/></MenuItem>
             </LinkContainer>
@@ -31,7 +28,7 @@ class UsersMenu extends Component {
           </Dropdown.Menu>
         </Dropdown>
       </div>
-    ) 
+    )
   }
 
 }

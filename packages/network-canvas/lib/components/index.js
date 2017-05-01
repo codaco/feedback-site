@@ -55,6 +55,7 @@ import './categories/CategoriesNewForm.jsx';
 // users
 
 import './users/UsersSingle.jsx';
+import './users/UsersList.jsx';
 import './users/UsersAccount.jsx';
 import './users/UsersEditForm.jsx';
 import './users/UsersProfile.jsx';

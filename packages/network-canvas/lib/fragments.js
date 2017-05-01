@@ -42,9 +42,6 @@ registerFragment(`
     postCount
     # vulcan:comments
     commentCount
-    # vulcan:notifications
-    notifications_users
-    notifications_posts
     # vulcan:voting
     downvotedComments {
       ...VotedItem
