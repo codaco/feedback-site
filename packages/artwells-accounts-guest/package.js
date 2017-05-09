@@ -17,8 +17,8 @@ Package.onUse(function (api) {
     api.use('brettle:accounts-add-service@0.3.0', ['client', 'server'], { weak: true });
     api.use('brettle:accounts-multiple@0.3.0', ['client', 'server'], { weak: true });
 
-    api.mainModule('accounts-guest-server.js', 'server');
-    api.mainModule('accounts-guest-client.js', 'client');
+    api.mainModule('server.js', 'server');
+    api.mainModule('client.js', 'client');
 
 });
 
@@ -28,8 +28,4 @@ Package.onTest(function (api) {
     api.use('artwells:accounts-guest');
     api.add_files('accounts-guest-server-tests.js', 'server');
     api.add_files('accounts-guest-client-tests.js', 'client');
-});
-
-Npm.depends({
-    'moniker': '0.1.2'
 });

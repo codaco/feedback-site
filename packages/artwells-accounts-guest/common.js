@@ -4,7 +4,7 @@ import Users from 'meteor/vulcan:users';
 export const AccountsGuest = {
   forced: true,   /* default to making loginVisitor automatic, and on logout */
   enabled: true,  /* on 'false'  Meteor.loginVisitor() will fail */
-  name: false,    /* defaults to returning "null" for user's name */
+  //name: false,    /* defaults to returning "null" for user's name */
   anonymous: false, /* defaults to using guests with randomly generated usernames/emails */
 };
 
@@ -48,5 +48,3 @@ Users.isGuest = function(userOrId) {
     return true;  // Return true if not logged in
   }
 }
-
-export default AccountsGuest;
