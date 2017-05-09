@@ -32,6 +32,7 @@ registerFragment(`
     ...UsersMinimumInfo
     createdAt
     isAdmin
+    isGuest
     bio
     htmlBio
     twitterUsername

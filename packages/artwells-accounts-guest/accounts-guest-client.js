@@ -1,3 +1,6 @@
+import { AccountsGuest } from './common';
+export * from './common';
+
 /*****************
  * special anonymous behavior so that visitors can
  * manipulate their work

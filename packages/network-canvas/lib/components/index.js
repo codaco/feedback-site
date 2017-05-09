@@ -58,6 +58,7 @@ import './categories/CategoriesNewForm.jsx';
 import './users/UsersSingle.jsx';
 import './users/UsersList.jsx';
 import './users/UsersAccount.jsx';
+import './users/UsersAccountStatus.jsx';
 import './users/UsersEditForm.jsx';
 import './users/UsersProfile.jsx';
 import './users/UsersProfileCheck.jsx';

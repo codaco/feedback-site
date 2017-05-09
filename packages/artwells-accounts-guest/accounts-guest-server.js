@@ -1,3 +1,6 @@
+import { AccountsGuest } from './common';
+export * from './common';
+
 Moniker = Npm.require('moniker');
 
 Accounts.removeOldGuests = function (before) {
@@ -127,7 +130,7 @@ function createGuestOptions(email) {
             username: guestname,
             email: email,
             profile: {
-                guest: true,
+                guest: true,    // setupGuestUser callback checks this
                 name: 'Guest'
             },
             password: Meteor.uuid(),

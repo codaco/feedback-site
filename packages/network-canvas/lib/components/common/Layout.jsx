@@ -11,6 +11,8 @@ class Layout extends Component {
 
         <Components.UsersProfileCheck {...this.props} />
 
+        <Components.UsersAccountStatus {...this.props} />
+
         <Components.Header {...this.props}/>
 
         <div className="main">
