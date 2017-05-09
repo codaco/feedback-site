@@ -4,3 +4,6 @@ Users.avatar.setOptions({
   "gravatarDefault": "mm",
   "defaultImageUrl": "http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y"
 });
+
+import { AccountsGuest } from 'meteor/artwells-accounts-guest';
+AccountsGuest.forced = false;

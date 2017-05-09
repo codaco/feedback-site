@@ -6,6 +6,7 @@ import './common/Header.jsx';
 import './common/Layout.jsx';
 import './common/Logo.jsx';
 import './common/Flash.jsx';
+import './common/GuestLoginForm.jsx';
 import './common/HeadTags.jsx';
 import './common/FlashMessages.jsx';
 import './common/SearchForm.jsx';
