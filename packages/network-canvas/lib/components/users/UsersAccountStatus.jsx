@@ -7,7 +7,9 @@ import { Button, Modal } from 'react-bootstrap';
 const LoggedInStatus = (props) => {
   const {currentUser, client} = props;
 
-  const handleLogout = () => Meteor.logout(() => client.resetStore());
+  const handleLogout = function() {
+    Meteor.logout(function() { client.resetStore() });
+  }
 
   return (
     <div>
