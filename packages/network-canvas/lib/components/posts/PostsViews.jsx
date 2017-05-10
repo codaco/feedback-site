@@ -32,11 +32,6 @@ const PostsViews = (props, context) => {
             </MenuItem>
           </LinkContainer>
         )}
-        <LinkContainer to={"/daily"} className="dropdown-item">
-          <MenuItem className={"bar"}>
-            <FormattedMessage id="posts.daily"/>
-          </MenuItem>
-        </LinkContainer>
       </DropdownButton>
     </div>
   )

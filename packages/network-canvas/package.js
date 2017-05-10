@@ -16,12 +16,9 @@ Package.onUse(function (api) {
     'vulcan:forms',
 
     'vulcan:base-styles',
-
-    // Handle SCSS assets
-    'fourseven:scss',
   ])
 
-  api.mainModule("lib/server/index.js", "server");
-  api.mainModule("lib/client/index.js", "client");
+  api.mainModule("lib/server.js", "server");
+  api.mainModule("lib/client.js", "client");
 
 })

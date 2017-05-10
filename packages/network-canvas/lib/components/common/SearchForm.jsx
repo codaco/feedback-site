@@ -8,15 +8,15 @@ import { withRouter } from 'react-router'
 const Input = FRC.Input;
 
 // see: http://stackoverflow.com/questions/1909441/jquery-keyup-delay
-const delay = (function(){
+const delay = (function() {
   var timer = 0;
-  return function(callback, ms){
-    clearTimeout (timer);
+  return function(callback, ms) {
+    clearTimeout(timer);
     timer = setTimeout(callback, ms);
   };
 })();
 
-class SearchForm extends Component{
+class SearchForm extends Component {
 
   constructor(props) {
     super(props);
@@ -33,14 +33,16 @@ class SearchForm extends Component{
   }
 
   search(data) {
-
     const router = this.props.router;
-    const query = data.searchQuery === '' ? router.location.query : {...router.location.query, query: data.searchQuery};
+    const query = { ...router.location.query, query: data.searchQuery };
+
+    if (!data.searchQuery) {
+      delete query.query
+    }
 
     delay(() => {
-      router.push({pathname: "/", query: query});
+      router.replace({query: query});
     }, 700 );
-
   }
 
   render() {
@@ -63,5 +65,9 @@ class SearchForm extends Component{
 SearchForm.contextTypes = {
   intl: intlShape
 };
+
+SearchForm.propTypes = {
+  router: React.PropTypes.object,
+}
 
 registerComponent('SearchForm', SearchForm, withRouter);
