@@ -60,3 +60,5 @@ PostsNewForm.contextTypes = {
 PostsNewForm.displayName = "PostsNewForm";
 
 registerComponent('PostsNewForm', PostsNewForm, withRouter, withMessages);
+
+export default PostsNewForm;
