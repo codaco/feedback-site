@@ -5,44 +5,31 @@ import Users from 'meteor/vulcan:users';
 import {Button} from 'react-bootstrap';
 import PostsNewForm from './PostsNewForm.jsx';
 
-const SuggestRelated = (props) => {
-  const goHome = function() {
-    props.onComplete('/');
-  }
-
-  return (
-    <div>
-      No Suggestions
-      <Button bsStyle="primary" onClick={(ev) => props.onComplete()}>Next</Button>
-      <Button onClick={goHome}>Cancel</Button>
-    </div>
-  )
-}
-
 class UserLogin extends React.Component {
   componentWillMount() {
-    if (!Users.isGuest(this.props.currentUser)) {
+    if (this.props.currentUser) {
+      // Skip this step if there's a user logged in (even a guest user)
       this.props.onComplete();
     }
   }
 
   render() {
-    const onComplete = this.props.onComplete;
-
-    function continueAsGuest() {
-      Meteor.loginVisitor(null, (err) => onComplete());
-    }
-
     return (
-      <div>
-        <Components.AccountsLoginForm onSignedInHook={onComplete} />
-        <Button onClick={continueAsGuest}>...or continue as Guest</Button>
-      </div>
+      <Components.GuestLoginForm onSignedInHook={this.props.onComplete} />
     )
   }
 }
 
-const steps = [SuggestRelated, UserLogin, PostsNewForm];
+const SuggestRelated = (props) => {
+  return (
+    <div>
+      No Suggestions
+      <Button bsStyle="primary" onClick={(ev) => props.onComplete()}>Next</Button>
+    </div>
+  )
+}
+
+const steps = [UserLogin, SuggestRelated, PostsNewForm];
 
 class CreatePostFlow extends React.Component {
   constructor(props) {
@@ -67,7 +54,6 @@ class CreatePostFlow extends React.Component {
 
   render() {
     const StepComponent = steps[this.state.step];
-    console.log("Render with step " + this.state.step)
 
     return (
       <StepComponent {...this.props} onComplete={this.onStepComplete} />

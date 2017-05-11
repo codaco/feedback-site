@@ -33,7 +33,6 @@ function setupGuestUser(user, options) {
   } else {
     user.isGuest = false;
   }
-  console.log('syncing user', user)
 
   return user;
 }
