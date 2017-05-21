@@ -14,6 +14,7 @@ import './common/Vote.jsx';
 
 // posts
 
+import './posts/CreatePostFlow.jsx';
 import './posts/PostsHome.jsx';
 import './posts/PostsSingle.jsx';
 import './posts/PostsNewButton.jsx';

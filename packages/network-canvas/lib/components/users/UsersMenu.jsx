@@ -21,9 +21,11 @@ class UsersMenu extends Component {
             <div>{Users.getDisplayName(currentUser)}</div>
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <LinkContainer to={`/account`}>
-              <MenuItem className="dropdown-item" eventKey="2"><FormattedMessage id="users.edit_account"/></MenuItem>
-            </LinkContainer>
+            <Components.ShowIf check={() => !Users.isGuest(currentUser)}>
+              <LinkContainer to={`/account`}>
+                <MenuItem className="dropdown-item" eventKey="2"><FormattedMessage id="users.edit_account"/></MenuItem>
+              </LinkContainer>
+            </Components.ShowIf>
             <MenuItem className="dropdown-item" eventKey="4" onClick={() => Meteor.logout(() => client.resetStore())}><FormattedMessage id="users.log_out"/></MenuItem>
           </Dropdown.Menu>
         </Dropdown>

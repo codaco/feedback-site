@@ -13,8 +13,6 @@ class Layout extends Component {
 
         <Components.UsersAccountStatus />
 
-        {!!this.props.currentUser ? <Components.UsersMenu/> : <Components.UsersAccountMenu/>}
-
         <div className="main">
 
           <Components.FlashMessages />
