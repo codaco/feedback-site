@@ -1,6 +1,7 @@
 import { Components, registerComponent, withCurrentUser, withMessages } from 'meteor/vulcan:core';
 import React, { PropTypes, Component } from 'react';
 import { FormattedMessage, intlShape } from 'react-intl';
+import { withRouter } from 'react-router'
 import Users from 'meteor/vulcan:users';
 
 const UsersEditForm = (props, context) => {
@@ -12,11 +13,14 @@ const UsersEditForm = (props, context) => {
     >
       <div className="page users-edit-form">
         <h2 className="page-title users-edit-form-title"><FormattedMessage id="users.edit_account"/></h2>
-        <Components.SmartForm 
-          collection={Users} 
+        <Components.SmartForm
+          collection={Users}
           {...props.terms}
           successCallback={user => {
             props.flash(context.intl.formatMessage({id: "users.edit_success"}, {name: Users.getDisplayName(user)}), 'success')
+          }}
+          removeSuccessCallback={() => {
+            props.router.push('/users');
           }}
           showRemove={true}
         />
@@ -36,4 +40,4 @@ UsersEditForm.contextTypes = {
 
 UsersEditForm.displayName = "UsersEditForm";
 
-registerComponent('UsersEditForm', UsersEditForm, withMessages, withCurrentUser);
+registerComponent('UsersEditForm', UsersEditForm, withMessages, withCurrentUser, withRouter);

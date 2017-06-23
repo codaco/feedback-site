@@ -29,7 +29,11 @@ const SuggestRelated = (props) => {
   )
 }
 
-const steps = [UserLogin, SuggestRelated, PostsNewForm];
+const steps = [
+  UserLogin,
+  //SuggestRelated,
+  PostsNewForm,
+];
 
 class CreatePostFlow extends React.Component {
   constructor(props) {

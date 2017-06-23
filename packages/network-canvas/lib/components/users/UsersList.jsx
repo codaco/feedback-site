@@ -26,7 +26,7 @@ const UserItem = (props) => {
 const UsersList = (props) => {
   const { results, loading, count, currentUser, error } = props;
 
-  if (!currentUser.isAdmin) {
+  if (!currentUser || !currentUser.isAdmin) {
     return (
       <Alert className="flash-message">You do not have permission to view this page</Alert>
     )

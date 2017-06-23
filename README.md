@@ -1,19 +1,32 @@
-<img src="https://d3vv6lp55qjaqc.cloudfront.net/items/2B3C1z2V2y421p2I0P42/vulcan-logo-noborder.png" width="200">
+# Network Canvas feedback site
 
-# Vulcan (formerly Telescope)
+## Usage
 
-[Version 1.3.2](https://github.com/TelescopeJS/Telescope/releases)
+Start:
 
-This is the Apollo/GraphQL version of Telescope, now known as [Vulcan](http://vulcanjs.org). [You can find the documentation here](http://docs.vulcanjs.org/).
+    npm run start
 
-### Links
+## User administration
 
-- [Vulcan Homepage](http://vulcanjs.org)
-- [Documentation](http://docs.vulcanjs.org)
-- [Old Telescope Homepage](http://telescopeapp.org)
+Go to [/users](http://localhost:3000/users) to see a list of users.
 
-### Other Versions
+### Via node console
 
-You can find the older, non-Apollo version of Telescope Nova on the [nova-classic](https://github.com/TelescopeJS/Telescope/tree/nova-classic) branch. 
+Open the Meteor shell:
 
-You can find the even older, non-React version of Telescope on the [legacy](https://github.com/TelescopeJS/Telescope/tree/legacy) branch.
+    meteor shell
+
+Then find and modify users:
+
+    let Users = require('meteor/vulcan:users').default
+    let u = Users.findOne({username: 'usermcuser'})   // or {email: 'xxxxx'}
+
+Remove old guest accounts:
+
+    const Accounts = require('meteor/vulcan:accounts').default
+    Accounts.removeOldGuests()
+
+## Code
+
+All React components live in `packages/network-canvas/lib/components`.
+
