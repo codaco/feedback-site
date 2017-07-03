@@ -1,0 +1,48 @@
+{
+  "public": {
+    "title": "User Feedback Mechanism!!!",
+    "tagline": "Gathering all the feedback",
+
+    "faviconUrl": "/favicon.ico",
+
+    "requirePostsApproval":false,
+    "requireViewInvite":false,
+    "requirePostInvite":false,
+    "autoSubscribe":false,
+    "postInterval": 20,
+    "commentInterval": 20,
+    "maxPostsPerDay": 10,
+    "postsPerPage": 10,
+
+    "language": "en",
+    "locale": "en"
+  },
+
+  "defaultEmail": "hello@world.com",
+  "scoreUpdateInterval": "300",
+
+  "postExcerptLength": 30,
+
+  "categories": [
+    {
+      "name": "Won't fix",
+      "slug": "wontfix",
+      "order": 1
+    },
+    {
+      "name": "In Progress",
+      "slug": "in-progress",
+      "order": 2
+    },
+    {
+      "name": "User Interface",
+      "slug": "ui",
+      "order": 3
+    },
+    {
+      "name": "Data Model",
+      "slug": "data-model",
+      "order": 4
+    }
+  ]
+}
