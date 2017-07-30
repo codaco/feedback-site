@@ -1,23 +1,27 @@
 
 # see http://docs.vulcanjs.org/packages
 
-vulcan:core
+vulcan:core@1.3.2
+vulcan:posts@1.3.2
+vulcan:comments@1.3.2
+vulcan:voting@1.3.2
+vulcan:accounts@1.3.2
+vulcan:categories@1.3.2
+vulcan:forms@1.3.2
+
+vulcan:base-styles@1.3.2
+
+fourseven:scss@4.5.0
 
 ############ Language Packages ############
 
-vulcan:i18n-en-us
+vulcan:i18n-en-us@1.3.2
 
 ############ Accounts Packages ############
 
 accounts-password@1.3.4
-# accounts-twitter
-# accounts-facebook
 
 ############ Your Packages ############
 
 artwells-accounts-guest
-network-canvas
-# example-movies
-# example-instagram
-# example-forum
-# example-customization
+#network-canvas
