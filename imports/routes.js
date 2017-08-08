@@ -1,11 +1,18 @@
 import { addRoute } from 'meteor/vulcan:core';
 
+import Home from './pages/Home';
+import PostsSingle from './pages/PostsSingle';
+import UsersAccount from './pages/UsersAccount';
+import UsersList from './pages/UsersList';
+import UsersResetPassword from './pages/UsersResetPassword';
+import UsersSingle from './pages/UsersSingle';
+
 addRoute([
-  {name:'posts.list',     path: '/',                    componentName: 'PostsHome'}, // index route
-  {name:'posts.single',   path:'posts/:_id(/:slug)',    componentName: 'PostsSingle'},
-  {name:'users.account',  path:'account',               componentName: 'UsersAccount'},
-  {name:'resetPassword',  path:'reset-password/:token', componentName: 'UsersResetPassword'},
-  {name:'users.single',   path:'users/:slug',           componentName: 'UsersSingle'},
-  {name:'users.edit',     path:'users/:slug/edit',      componentName: 'UsersAccount'},
-  {name:'users.list',     path:'users',                 componentName: 'UsersList'},
+  {name:'posts.list',     path: '/',                    component: Home},
+  {name:'posts.single',   path:'posts/:_id(/:slug)',    component: PostsSingle},
+  {name:'users.account',  path:'account',               component: UsersAccount},
+  {name:'resetPassword',  path:'reset-password/:token', component: UsersResetPassword},
+  {name:'users.single',   path:'users/:slug',           component: UsersSingle},
+  {name:'users.edit',     path:'users/:slug/edit',      component: UsersAccount},
+  {name:'users.list',     path:'users',                 component: UsersList},
 ]);

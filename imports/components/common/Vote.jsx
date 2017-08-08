@@ -2,7 +2,7 @@ import { Components, registerComponent, withMessages } from 'meteor/vulcan:core'
 import React, { PropTypes, Component } from 'react';
 import classNames from 'classnames';
 import { withVote, hasUpvoted, hasDownvoted } from 'meteor/vulcan:voting';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage, intlShape } from 'meteor/vulcan:i18n';
 
 class Vote extends Component {
 
@@ -21,7 +21,7 @@ class Vote extends Component {
 
   note: with optimisitc UI, loading functions are not needed
   also, setState triggers issues when the component is unmounted
-  before the vote mutation returns. 
+  before the vote mutation returns.
 
   */
 
@@ -50,7 +50,7 @@ class Vote extends Component {
       this.props.vote({document, voteType, collection, currentUser: this.props.currentUser}).then(result => {
         // this.stopLoading();
       });
-    } 
+    }
   }
 
   getActionClass() {
@@ -60,7 +60,7 @@ class Vote extends Component {
     const isUpvoted = hasUpvoted(user, document);
     const isDownvoted = hasDownvoted(user, document);
     const actionsClass = classNames(
-      'vote', 
+      'vote',
       {voted: isUpvoted || isDownvoted},
       {upvoted: isUpvoted},
       {downvoted: isDownvoted}

@@ -1,22 +1,22 @@
-import { registerComponent } from 'meteor/vulcan:core';
+import { registerComponent, Components } from 'meteor/vulcan:core';
 import React, { PropTypes, Component } from 'react';
-import { intlShape } from 'react-intl';
+import { intlShape } from 'meteor/vulcan:i18n';
 import Formsy from 'formsy-react';
 import FRC from 'formsy-react-components';
-import { withRouter } from 'react-router'
+import { withRouter, Link } from 'react-router'
 
 const Input = FRC.Input;
 
 // see: http://stackoverflow.com/questions/1909441/jquery-keyup-delay
-const delay = (function() {
+const delay = (function(){
   var timer = 0;
-  return function(callback, ms) {
-    clearTimeout(timer);
+  return function(callback, ms){
+    clearTimeout (timer);
     timer = setTimeout(callback, ms);
   };
 })();
 
-class SearchForm extends Component {
+class SearchForm extends Component{
 
   constructor(props) {
     super(props);
@@ -26,6 +26,7 @@ class SearchForm extends Component {
     }
   }
 
+  // note: why do we need this?
   componentWillReceiveProps(nextProps) {
     this.setState({
       search: this.props.router.location.query.query || ''
@@ -33,19 +34,24 @@ class SearchForm extends Component {
   }
 
   search(data) {
-    const router = this.props.router;
-    const query = { ...router.location.query, query: data.searchQuery };
 
-    if (!data.searchQuery) {
-      delete query.query
-    }
+    const router = this.props.router;
+    const routerQuery = _.clone(router.location.query);
+    delete routerQuery.query;
+
+    const query = data.searchQuery === '' ? routerQuery : {...routerQuery, query: data.searchQuery};
 
     delay(() => {
-      router.replace({query: query});
+      router.push({pathname: "/", query: query});
     }, 700 );
+
   }
 
   render() {
+
+    const resetQuery = _.clone(this.props.location.query);
+    delete resetQuery.query;
+
     return (
       <div className="search-form">
         <Formsy.Form onChange={this.search}>
@@ -56,6 +62,7 @@ class SearchForm extends Component {
             type="text"
             layout="elementOnly"
           />
+          {this.state.search !== '' ? <Link className="search-form-reset" to={{pathname: '/', query: resetQuery}}><Components.Icon name="close" /></Link> : null}
         </Formsy.Form>
       </div>
     )
@@ -65,9 +72,5 @@ class SearchForm extends Component {
 SearchForm.contextTypes = {
   intl: intlShape
 };
-
-SearchForm.propTypes = {
-  router: React.PropTypes.object,
-}
 
 registerComponent('SearchForm', SearchForm, withRouter);

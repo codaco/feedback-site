@@ -53,3 +53,5 @@ const options = {
 }
 
 registerComponent('UsersList', UsersList, withCurrentUser, [withList, options]);
+
+export default withCurrentUser(withList(options)(UsersList));

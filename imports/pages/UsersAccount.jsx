@@ -13,4 +13,6 @@ UsersAccount.propTypes = {
 
 UsersAccount.displayName = "UsersAccount";
 
-registerComponent('UsersAccount', UsersAccount, withCurrentUser);
+//registerComponent('UsersAccount', UsersAccount, withCurrentUser);
+
+export default withCurrentUser(UsersAccount);

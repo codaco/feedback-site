@@ -2,7 +2,7 @@ import { Components, getRawComponent, registerComponent, withList, withCurrentUs
 import React from 'react';
 import Posts from 'meteor/vulcan:posts';
 import { Alert } from 'react-bootstrap';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage, intlShape } from 'meteor/vulcan:i18n';
 
 const Error = ({error}) => <Alert className="flash-message" bsStyle="danger"><FormattedMessage id={error.id} values={{value: error.value}}/>{error.message}</Alert>
 
@@ -45,9 +45,9 @@ const PostsList = (props) => {
           <Components.PostsNoResults/>
         </div>
       </div>
-    )  
+    )
   }
-  
+
 };
 
 PostsList.displayName = "PostsList";
@@ -74,3 +74,5 @@ const options = {
 };
 
 registerComponent('PostsList', PostsList, withCurrentUser, [withList, options]);
+
+export default PostsList;

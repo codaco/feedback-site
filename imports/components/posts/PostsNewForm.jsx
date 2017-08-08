@@ -1,7 +1,7 @@
 import { Components, registerComponent, getRawComponent, getFragment, withMessages } from 'meteor/vulcan:core';
 import Posts from "meteor/vulcan:posts";
 import React, { PropTypes, Component } from 'react';
-import { intlShape } from 'react-intl';
+import { intlShape } from 'meteor/vulcan:i18n';
 import { withRouter } from 'react-router'
 
 const formSchema = {

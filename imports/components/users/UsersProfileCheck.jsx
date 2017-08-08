@@ -2,14 +2,14 @@ import React, { PropTypes, Component } from 'react';
 import { Modal } from 'react-bootstrap';
 import Users from 'meteor/vulcan:users';
 import { withCurrentUser, Utils, Components, registerComponent, withMessages } from 'meteor/vulcan:core';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage, intlShape } from 'meteor/vulcan:i18n';
 
 const UsersProfileCheck = (props, context) => {
 
   const { currentUser } = props;
 
   if (currentUser && !Users.hasCompletedProfile(currentUser)) {
-    
+
     // return fields that are required by the schema but haven't been filled out yet
     const schema = Utils.stripTelescopeNamespace(Users.simpleSchema()._schema);
     const requiredFields = _.filter(_.keys(schema), (fieldName) => {

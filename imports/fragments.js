@@ -33,7 +33,6 @@ registerFragment(`
     createdAt
     isAdmin
     isGuest
-    bio
     htmlBio
     twitterUsername
     website

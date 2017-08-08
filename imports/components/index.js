@@ -1,13 +1,11 @@
-
 // common
 
+import './common/Layout.jsx';
 import './common/Footer.jsx';
 import './common/Header.jsx';
-import './common/Layout.jsx';
 import './common/Logo.jsx';
 import './common/Flash.jsx';
 import './common/GuestLoginForm.jsx';
-import './common/HeadTags.jsx';
 import './common/FlashMessages.jsx';
 import './common/SearchForm.jsx';
 import './common/Vote.jsx';
@@ -15,8 +13,6 @@ import './common/Vote.jsx';
 // posts
 
 import './posts/CreatePostFlow.jsx';
-import './posts/PostsHome.jsx';
-import './posts/PostsSingle.jsx';
 import './posts/PostsNewButton.jsx';
 import './posts/PostsLoadMore.jsx';
 import './posts/PostsNoMore.jsx';
@@ -53,9 +49,6 @@ import './categories/CategoriesNewForm.jsx';
 
 // users
 
-import './users/UsersSingle.jsx';
-import './users/UsersList.jsx';
-import './users/UsersAccount.jsx';
 import './users/UsersAccountStatus.jsx';
 import './users/UsersEditForm.jsx';
 import './users/UsersProfile.jsx';
@@ -64,4 +57,3 @@ import './users/UsersAvatar.jsx';
 import './users/UsersName.jsx';
 import './users/UsersMenu.jsx';
 import './users/UsersAccountMenu.jsx';
-import './users/UsersResetPassword.jsx';

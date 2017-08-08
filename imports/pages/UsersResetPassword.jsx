@@ -41,3 +41,5 @@ UsersResetPassword.propsTypes = {
 UsersResetPassword.displayName = 'UsersResetPassword';
 
 registerComponent('UsersResetPassword', UsersResetPassword, withCurrentUser);
+
+export default withCurrentUser(UsersResetPassword);

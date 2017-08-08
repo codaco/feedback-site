@@ -1,5 +1,7 @@
-import { Components, registerComponent } from 'meteor/vulcan:core';
 import React from 'react';
+
+import { Components } from 'meteor/vulcan:core';
+//import PostsPage from '../components/posts/PostsPage';
 
 const PostsSingle = (props, context) => {
   return <Components.PostsPage documentId={props.params._id} />
@@ -7,4 +9,4 @@ const PostsSingle = (props, context) => {
 
 PostsSingle.displayName = "PostsSingle";
 
-registerComponent('PostsSingle', PostsSingle);
+export default PostsSingle;

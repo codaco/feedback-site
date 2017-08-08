@@ -1,6 +1,6 @@
 import { Components, registerComponent, getFragment, withMessages } from 'meteor/vulcan:core';
 import React, { PropTypes, Component } from 'react';
-import { intlShape } from 'react-intl';
+import { intlShape } from 'meteor/vulcan:i18n';
 import Posts from "meteor/vulcan:posts";
 import { withRouter } from 'react-router'
 
