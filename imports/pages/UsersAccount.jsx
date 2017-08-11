@@ -1,5 +1,6 @@
 import { Components, registerComponent, withCurrentUser } from 'meteor/vulcan:core';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const UsersAccount = (props, context) => {
   // note: terms is as the same as a document-shape the SmartForm edit-mode expects to receive
@@ -8,7 +9,7 @@ const UsersAccount = (props, context) => {
 };
 
 UsersAccount.propTypes = {
-  currentUser: React.PropTypes.object
+  currentUser: PropTypes.object
 };
 
 UsersAccount.displayName = "UsersAccount";

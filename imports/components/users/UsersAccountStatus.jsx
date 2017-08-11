@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Users from 'meteor/vulcan:users';
 import { withCurrentUser, Components, registerComponent } from 'meteor/vulcan:core';
 
@@ -13,7 +14,7 @@ const UsersAccountStatus = (props, context) => {
 UsersAccountStatus.displayName = 'UsersAccountStatus';
 
 UsersAccountStatus.propTypes = {
-  currentUser: React.PropTypes.object,
+  currentUser: PropTypes.object,
 }
 
 registerComponent('UsersAccountStatus', UsersAccountStatus, withCurrentUser);

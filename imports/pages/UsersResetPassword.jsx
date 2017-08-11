@@ -1,5 +1,6 @@
 import { Components, registerComponent, withCurrentUser } from 'meteor/vulcan:core';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { intlShape } from 'react-intl';
 
@@ -34,8 +35,8 @@ UsersResetPassword.contextTypes = {
 }
 
 UsersResetPassword.propsTypes = {
-  currentUser: React.PropTypes.object,
-  params: React.PropTypes.object,
+  currentUser: PropTypes.object,
+  params: PropTypes.object,
 };
 
 UsersResetPassword.displayName = 'UsersResetPassword';
