@@ -34,7 +34,7 @@ const Header = (props, context) => {
 Header.displayName = "Header";
 
 Header.propTypes = {
-  currentUser: React.PropTypes.object,
+  currentUser: PropTypes.object,
 };
 
 registerComponent('Header', Header, withCurrentUser);

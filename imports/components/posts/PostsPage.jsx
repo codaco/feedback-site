@@ -14,7 +14,6 @@ class PostsPage extends Component {
 
     } else if (!this.props.document) {
 
-      console.log(`// missing post (_id: ${this.props.documentId})`);
       return <div className="posts-page"><FormattedMessage id="app.404"/></div>
 
     } else {
@@ -24,6 +23,9 @@ class PostsPage extends Component {
 
       return (
         <div className="posts-page">
+
+          <Components.HeadTags url={Posts.getPageUrl(post, true)} title={post.title} image={post.thumbnailUrl} description={post.excerpt} />
+
           <Components.PostsItem post={post} currentUser={this.props.currentUser} />
 
           {post.htmlBody ? <div className="posts-page-body" dangerouslySetInnerHTML={htmlBody}></div> : null}

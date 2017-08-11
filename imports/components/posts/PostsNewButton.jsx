@@ -1,26 +1,28 @@
 import { Components, registerComponent, withCurrentUser } from 'meteor/vulcan:core';
-import React, { PropTypes, Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage, intlShape } from 'meteor/vulcan:i18n';
-import { Button } from 'react-bootstrap';
+import Button from 'react-bootstrap/lib/Button';
 
 const PostsNewButton = (props, context) => {
 
-  const button = <Button className="posts-new-button" bsStyle="primary"><FormattedMessage id="posts.new_post"/></Button>;
+  const size = props.currentUser ? 'large' : 'small';
+  const button = <Button className="posts-new-button" bsStyle="primary"><Components.Icon name="new"/> <FormattedMessage id="posts.new_post"/></Button>;
   return (
-    <Components.ModalTrigger size="large" title={context.intl.formatMessage({id: "posts.new_post"})} component={button}>
+    <Components.ModalTrigger size={size} title={context.intl.formatMessage({ id: 'posts.new_post' })} component={button}>
       <Components.CreatePostFlow />
     </Components.ModalTrigger>
   )
 }
 
-PostsNewButton.displayName = "PostsNewButton";
+PostsNewButton.displayName = 'PostsNewButton';
 
 PostsNewButton.propTypes = {
-  currentUser: React.PropTypes.object,
+  currentUser: PropTypes.object,
 };
 
 PostsNewButton.contextTypes = {
-  messages: React.PropTypes.object,
+  messages: PropTypes.object,
   intl: intlShape
 };
 

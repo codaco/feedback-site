@@ -1,6 +1,6 @@
 import { addRoute } from 'meteor/vulcan:core';
 
-import Home from './pages/Home';
+import PostsHome from './pages/PostsHome';
 import PostsSingle from './pages/PostsSingle';
 import UsersAccount from './pages/UsersAccount';
 import UsersList from './pages/UsersList';
@@ -8,7 +8,7 @@ import UsersResetPassword from './pages/UsersResetPassword';
 import UsersSingle from './pages/UsersSingle';
 
 addRoute([
-  {name:'posts.list',     path: '/',                    component: Home},
+  {name:'posts.list',     path: '/',                    component: PostsHome},
   {name:'posts.single',   path:'posts/:_id(/:slug)',    component: PostsSingle},
   {name:'users.account',  path:'account',               component: UsersAccount},
   {name:'resetPassword',  path:'reset-password/:token', component: UsersResetPassword},

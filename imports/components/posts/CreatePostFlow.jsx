@@ -1,5 +1,5 @@
 import React from 'react';
-import { Components, registerComponent, withCurrentUser } from 'meteor/vulcan:core';
+import { Components, registerComponent, getComponent, withCurrentUser } from 'meteor/vulcan:core';
 import { withRouter } from 'react-router'
 import Users from 'meteor/vulcan:users';
 import {Button} from 'react-bootstrap';
@@ -32,7 +32,7 @@ const SuggestRelated = (props) => {
 const steps = [
   UserLogin,
   //SuggestRelated,
-  PostsNewForm,
+  getComponent('PostsNewForm'),
 ];
 
 class CreatePostFlow extends React.Component {

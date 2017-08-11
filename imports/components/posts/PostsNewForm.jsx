@@ -1,10 +1,12 @@
-import { Components, registerComponent, getRawComponent, getFragment, withMessages } from 'meteor/vulcan:core';
+import { Components, registerComponent, getFragment, withMessages } from 'meteor/vulcan:core';
 import Posts from "meteor/vulcan:posts";
-import React, { PropTypes, Component } from 'react';
-import { intlShape } from 'meteor/vulcan:i18n';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { intlShape, FormattedMessage } from 'meteor/vulcan:i18n';
 import { withRouter } from 'react-router'
+import SimpleSchema from 'simpl-schema';
 
-const formSchema = {
+const formSchema = new SimpleSchema({
   title: {
     type: String,
     optional: false,
@@ -25,12 +27,12 @@ const formSchema = {
     control: "textarea",
     order: 30
   },
-}
+})._schema;
 
 const PostsNewForm = (props, context) =>
   <Components.ShowIf
       check={Posts.options.mutations.new.check}
-      failureComponent={<Components.AccountsLoginForm />}
+      failureComponent={<div><p className="posts-new-form-message"><FormattedMessage id="posts.sign_up_or_log_in_first" /></p><Components.AccountsLoginForm /></div>}
     >
       <div className="posts-new-form">
         <Components.SmartForm
@@ -39,7 +41,7 @@ const PostsNewForm = (props, context) =>
           mutationFragment={getFragment('PostsPage')}
           successCallback={post => {
             props.closeModal();
-            props.router.push({pathname: Posts.getPageUrl(post)});
+            props.router.push({pathname: props.redirect || Posts.getPageUrl(post)});
             props.flash(context.intl.formatMessage({id: "posts.created_message"}), "success");
           }}
         />
@@ -47,18 +49,17 @@ const PostsNewForm = (props, context) =>
     </Components.ShowIf>
 
 PostsNewForm.propTypes = {
-  closeModal: React.PropTypes.func,
-  router: React.PropTypes.object,
-  flash: React.PropTypes.func,
+  closeModal: PropTypes.func,
+  router: PropTypes.object,
+  flash: PropTypes.func,
+  redirect: PropTypes.string,
 }
 
 PostsNewForm.contextTypes = {
-  closeCallback: React.PropTypes.func,
+  closeCallback: PropTypes.func,
   intl: intlShape
 };
 
 PostsNewForm.displayName = "PostsNewForm";
 
 registerComponent('PostsNewForm', PostsNewForm, withRouter, withMessages);
-
-export default PostsNewForm;
