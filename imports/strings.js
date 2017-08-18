@@ -23,4 +23,5 @@ addStrings('en', {
   "posts.dateNotDefined": "Date not defined",
   "posts.subscribed_posts" : "Posts subscribed to",
   "posts.max_per_day": "Sorry, you cannot submit more than {value} posts per day.",
+  "accounts.error_token_expired": "Invalid password reset token",
 });
