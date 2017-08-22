@@ -2,9 +2,28 @@
 
 ## Usage
 
+Install:
+
+    npm install -D
+
 Start:
 
-    npm run start
+    npm start
+
+## Deployment
+
+The site is deployed with Meteor Up:
+
+    npm install -g mup
+
+Get the `.deploy/` directory from someone who already has it (it's not checked
+into git). Then:
+
+    cd .deploy
+    mup deploy
+
+See the [Meteor Up docs](https://github.com/zodern/meteor-up) for other
+commands and options.
 
 ## User administration
 
