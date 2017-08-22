@@ -4,7 +4,6 @@ import PostsHome from './pages/PostsHome';
 import PostsSingle from './pages/PostsSingle';
 import UsersAccount from './pages/UsersAccount';
 import UsersList from './pages/UsersList';
-import UsersResetPassword from './pages/UsersResetPassword';
 import UsersSingle from './pages/UsersSingle';
 
 addRoute([
