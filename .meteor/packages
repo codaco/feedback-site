@@ -1,7 +1,11 @@
 
 # see http://docs.vulcanjs.org/packages
 
+# Internal dependencies
 dynamic-import
+accounts-password@1.4.0
+fourseven:scss@4.5.0
+
 vulcan:core@1.7.0
 vulcan:posts@1.7.0
 vulcan:comments@1.7.0
@@ -10,14 +14,10 @@ vulcan:accounts@1.7.0
 vulcan:categories@1.7.0
 vulcan:forms@1.7.0
 vulcan:i18n-en-us@1.7.0
-
 #vulcan:base-components
-vulcan:base-styles@1.7.0
+#vulcan:base-styles@1.7.0
 
-fourseven:scss@4.5.0
+# vendored
 
-accounts-password@1.4.0
-
-############ Your Packages ############
-
+networkcanvas-styles
 artwells-accounts-guest

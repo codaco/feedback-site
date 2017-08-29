@@ -1,0 +1,27 @@
+.main, .footer, .header{
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 $hmargin;
+  max-width: 1200px;
+}
+
+.main{
+  margin-bottom: $vmargin;
+}
+
+a{
+  cursor: pointer;
+}
+
+.page-title{
+  margin-bottom: $vmargin*2;
+}
+
+.message.error {
+  color: $red;
+}
+
+// Bootstrap3 compatability
+.open > .dropdown-menu {
+  display: block;
+}
