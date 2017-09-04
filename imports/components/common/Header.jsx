@@ -9,25 +9,21 @@ const Header = (props, context) => {
   const tagline = getSetting("tagline");
 
   return (
-    <div className="header-wrapper">
+    <nav className="navbar navbar-default navbar-static-top">
 
-      <header className="header">
+      <div className="container">
 
-        <div className="logo">
-          <Components.Logo logoUrl={logoUrl} siteTitle={siteTitle} />
-          {tagline ? <h2 className="tagline">{tagline}</h2> : "" }
-        </div>
-
-        <div className="nav">
-
-          <div className="nav-user">
-            {!!props.currentUser ? <Components.UsersMenu/> : <Components.UsersAccountMenu/>}
-          </div>
+        <div className="navbar-header">
+          <a className="navbar-brand" href="/">{siteTitle}</a>
 
         </div>
 
-      </header>
-    </div>
+        <div className="nav navbar-nav navbar-right">
+          {!!props.currentUser ? <Components.UsersMenu/> : <Components.UsersAccountMenu/>}
+        </div>
+
+      </div>
+    </nav>
   )
 }
 

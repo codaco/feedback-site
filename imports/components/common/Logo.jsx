@@ -5,11 +5,11 @@ import { IndexLink } from 'react-router';
 const Logo = ({logoUrl, siteTitle}) => {
   if (logoUrl) {
     return (
-      <h1 className="logo-image ">
+      <a className="logo-image ">
         <IndexLink to={{pathname: "/"}}>
           <img src={logoUrl} alt={siteTitle} />
         </IndexLink>
-      </h1>
+      </a>
     )
   } else {
     return (

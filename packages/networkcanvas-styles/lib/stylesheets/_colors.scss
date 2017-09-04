@@ -27,7 +27,27 @@ $charcoal: #6d6f76;
 $platinum: #f2f6f7;
 $dark-platinum: #dae3e5;
 
+
+// Bootstrap 3 vars
+
+$brand-primary:             $network-canvas-coral !default;
+$brand-success:             $light-sea-green !default;
+$brand-info:                $sea-serpent !default;
+$brand-warning:             $mustard !default;
+$brand-danger:              $tomato !default;
+$brand-inverse:             $navy-taupe !default;
+
+$gray-lightest: $platinum;
+$gray-lighter: $dark-platinum;
+$gray-light: $charcoal;
+$gray: darken($charcoal, 20%);
+$gray-dark: darken($charcoal, 30%);
+
+
+
 /////// Original vars
+
+
 
 $light-blue: $sea-serpent;
 $black: $rich-black;

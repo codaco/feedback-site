@@ -20,8 +20,3 @@ a{
 .message.error {
   color: $red;
 }
-
-// Bootstrap3 compatability
-.open > .dropdown-menu {
-  display: block;
-}
