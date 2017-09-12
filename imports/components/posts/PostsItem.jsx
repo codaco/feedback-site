@@ -51,10 +51,7 @@ class PostsItem extends PureComponent {
 
           <div className="posts-item-meta">
             <div className="posts-item-user">
-              {post.user ?
-                <Components.UsersName user={post.user} /> :
-                <div className="users-name">Guest User</div>
-              }
+              <Components.UsersName user={post.user} />
             </div>
             <div className="posts-item-date">{post.postedAt ? moment(new Date(post.postedAt)).fromNow() : <FormattedMessage id="posts.dateNotDefined"/>}</div>
             <div className="posts-item-comments">

@@ -6,6 +6,7 @@ dynamic-import
 accounts-password@1.4.0
 fourseven:scss@4.5.0
 
+vulcan:admin@1.7.0
 vulcan:core@1.7.0
 vulcan:posts@1.7.0
 vulcan:comments@1.7.0

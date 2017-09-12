@@ -84,6 +84,7 @@ ui@1.0.13
 underscore@1.0.10
 url@1.1.0
 vulcan:accounts@1.7.0
+vulcan:admin@1.7.0
 vulcan:categories@1.7.0
 vulcan:comments@1.7.0
 vulcan:core@1.7.0

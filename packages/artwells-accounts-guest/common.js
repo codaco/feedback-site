@@ -42,7 +42,7 @@ addCallback('users.new.sync', setupGuestUser);
 Users.isGuest = function(userOrId) {
   try {
     const user = Users.getUser(userOrId);
-    return !user || !!user.isGuest;
+    return !user || !!user.isGuest || !user._id || user.username.startsWith('guest');
   } catch (e) {
     return true;  // Return true if not logged in
   }
