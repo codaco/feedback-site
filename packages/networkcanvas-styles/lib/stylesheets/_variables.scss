@@ -31,16 +31,9 @@ $headings-color:          inherit !default;
 
 //
 
-$smaller-font: $font-size-small;
-$small-font: $font-size-small;
-$medium-font: $font-size-base;
-$large-font: $font-size-large;
-$larger-font: $font-size-h3;
-
 $border: 1px solid $light-border;
 
 $spacer:   3rem;
-$line-height-base: 1.6;
 
 @mixin activeHover{
   &:hover{
@@ -57,7 +50,7 @@ $line-height-base: 1.6;
 }
 
 @mixin border-radius{
-  border-radius: .25rem;
+  border-radius: $border-radius-base;
 }
 @mixin border{
   border: $border;

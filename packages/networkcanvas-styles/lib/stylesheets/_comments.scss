@@ -31,7 +31,7 @@
 .comments-item-meta{
   @include flex-center;
   margin-bottom: $vmargin;
-  
+
   .comments-item-vote{
     margin-right: 10px;
   }
@@ -45,10 +45,10 @@
   .comments-item-date{
     margin-right: $hmargin;
     color: $medium-text;
-    font-size: $small-font;
+    font-size: $font-size-small;
   }
   .comment-edit, .comment-delete {
-    font-size: $small-font;
+    font-size: $font-size-small;
   }
   .comment-delete {
     margin-left: 8px;

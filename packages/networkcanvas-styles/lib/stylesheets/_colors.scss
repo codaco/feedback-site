@@ -30,7 +30,7 @@ $dark-platinum: #dae3e5;
 
 // Bootstrap 3 vars
 
-$brand-primary:             $network-canvas-coral !default;
+$brand-primary:             $cerulean-blue !default;    // Main link/accent color
 $brand-success:             $light-sea-green !default;
 $brand-info:                $sea-serpent !default;
 $brand-warning:             $mustard !default;
@@ -47,13 +47,9 @@ $gray-dark: darken($charcoal, 30%);
 
 /////// Original vars
 
-
-
-$light-blue: $sea-serpent;
 $black: $rich-black;
 $red: $network-canvas-coral;
 
-$header-bg: $navy-taupe;
 $active-color: $cerulean-blue;
 
 $lightest-border: $platinum;

@@ -46,7 +46,7 @@
       @include activeHover;
     }
     &.posts-view-active{
-      background: $light-blue;
+      background: $brand-primary;
     }
   }
 }
@@ -71,7 +71,7 @@
   text-align: center;
   @include border;
   @include border-radius;
-  font-size: $large-font;
+  font-size: $font-size-large;
   padding: 10px 20px;
   @include activeHover;
   width: 100%;
@@ -124,9 +124,12 @@
     text-align: center;
     display: block;
   }
-  .voted &{
+
+  .upvoted &{
     color: $light-text;
+    background-color: darken($active-color, 15%);
   }
+
   @include activeHover;
   &, &:active, &:hover{
     text-decoration: none;
@@ -138,14 +141,15 @@
 }
 
 .posts-item-title{
+  font-size: $font-size-h4;
+
   @include small{
     margin-right: 40px;
-    font-size: $large-font;
     margin-bottom: $vmargin/2;
   }
   @include medium-large{
     @include flex-center;
-    font-size: $larger-font;
+    margin-top: 5px;
     margin-bottom: 5px;
   }
   .posts-item-title-link{
@@ -168,7 +172,7 @@
   @include flex-center;
   a{
     display: block;
-    font-size: $small-font;
+    font-size: $font-size-small;
     @include border;
     @include border-radius;
     margin-right: 5px;
@@ -181,7 +185,7 @@
   @include medium-large{
     @include flex-center;
   }
-  font-size: $small-font;
+  font-size: $font-size-small;
   .avatar{
     margin-right: 5px;
   }
@@ -211,7 +215,7 @@
   }
   @include border;
   @include border-radius;
-  font-size: $smaller-font;
+  font-size: $font-size-small;
   .posts-stats-item{
     border-right: $border;
     padding: 2px 5px;
@@ -267,7 +271,6 @@
 }
 
 .posts-page-body{
-  font-size: $large-font;
   margin-bottom: $hmargin;
 }
 
