@@ -11,16 +11,27 @@ import { withApollo } from 'react-apollo';
 
 const UsersMenu = ({currentUser, client}) =>
   <NavDropdown id="user-dropdown" title={Users.getDisplayName(currentUser)}>
-    <LinkContainer to={`/users/${currentUser.slug}`}>
-      <MenuItem className="dropdown-item" eventKey="1"><FormattedMessage id="users.profile"/></MenuItem>
-    </LinkContainer>
-    <LinkContainer to={`/account`}>
-      <MenuItem className="dropdown-item" eventKey="2"><FormattedMessage id="users.edit_account"/></MenuItem>
-    </LinkContainer>
+    {currentUser.isGuest ?
+      null :
+      <LinkContainer to={`/users/${currentUser.slug}`}>
+        <MenuItem className="dropdown-item" eventKey="1"><FormattedMessage id="users.profile" /></MenuItem>
+      </LinkContainer>
+    }
 
-    <LinkContainer to={`/admin`}>
-      <MenuItem className="dropdown-item" eventKey="2">Admin</MenuItem>
-    </LinkContainer>
+    {currentUser.isGuest ?
+      null :
+      <LinkContainer to={`/account`}>
+        <MenuItem className="dropdown-item" eventKey="2"><FormattedMessage id="users.edit_account"/></MenuItem>
+      </LinkContainer>
+    }
+
+    {
+      currentUser.isAdmin ?
+        <LinkContainer to={`/admin`}>
+          <MenuItem className="dropdown-item" eventKey="3">Admin</MenuItem>
+        </LinkContainer>
+        : null
+    }
     <MenuItem className="dropdown-item" eventKey="4" onClick={() => Meteor.logout(() => client.resetStore())}><FormattedMessage id="users.log_out"/></MenuItem>
   </NavDropdown>
 
