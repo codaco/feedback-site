@@ -3,6 +3,7 @@ import { addStrings } from 'meteor/vulcan:core';
 // See default strings in packages/vulcan-i18n-en-us/lib/en_US.js
 
 addStrings('en', {
+  "comments.comments": "Discussion",
   "posts.new_post": "New Post",
   "posts.edit": "Edit",
   "posts.edit_success": "Post “{title}” edited.",
