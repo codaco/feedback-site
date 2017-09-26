@@ -6,7 +6,6 @@ const Header = (props, context) => {
 
   const logoUrl = getSetting("logoUrl");
   const siteTitle = getSetting("title", "My App");
-  const tagline = getSetting("tagline");
 
   return (
     <nav className="navbar navbar-default navbar-static-top">
