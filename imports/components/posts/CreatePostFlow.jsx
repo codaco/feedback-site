@@ -4,18 +4,19 @@ import { withRouter } from 'react-router'
 import Users from 'meteor/vulcan:users';
 import {Button} from 'react-bootstrap';
 import PostsNewForm from './PostsNewForm.jsx';
+import SwitchableLoginForm from '../common/SwitchableLoginForm.jsx';
 
 class UserLogin extends React.Component {
   componentWillMount() {
-    if (this.props.currentUser) {
-      // Skip this step if there's a user logged in (even a guest user)
+    if (this.props.currentUser && !this.props.currentUser.isGuest) {
+      // Skip this step for non-guest users
       this.props.onComplete();
     }
   }
 
   render() {
     return (
-      <Components.GuestLoginForm onSignedInHook={this.props.onComplete} />
+      <Components.SwitchableLoginForm onComplete={this.props.onComplete} />
     )
   }
 }
@@ -46,6 +47,7 @@ class CreatePostFlow extends React.Component {
   }
 
   onStepComplete(redirect) {
+    console.log("Complete!")
     if (redirect) {
       this.props.router.push(redirect);
     } else {
