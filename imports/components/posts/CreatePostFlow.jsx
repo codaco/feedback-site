@@ -3,8 +3,6 @@ import { Components, registerComponent, getComponent, withCurrentUser } from 'me
 import { withRouter } from 'react-router'
 import Users from 'meteor/vulcan:users';
 import {Button} from 'react-bootstrap';
-import PostsNewForm from './PostsNewForm.jsx';
-import SwitchableLoginForm from '../common/SwitchableLoginForm.jsx';
 
 class UserLogin extends React.Component {
   componentWillMount() {
@@ -30,12 +28,6 @@ const SuggestRelated = (props) => {
   )
 }
 
-const steps = [
-  UserLogin,
-  //SuggestRelated,
-  getComponent('PostsNewForm'),
-];
-
 class CreatePostFlow extends React.Component {
   constructor(props) {
     super(props)
@@ -44,6 +36,14 @@ class CreatePostFlow extends React.Component {
     this.state = {
       step: 0
     }
+  }
+
+  get steps() {
+    return [
+      UserLogin,
+      getComponent('SuggestedPosts'),
+      getComponent('PostsNewForm'),
+    ];
   }
 
   onStepComplete(redirect) {
@@ -59,7 +59,7 @@ class CreatePostFlow extends React.Component {
   }
 
   render() {
-    const StepComponent = steps[this.state.step];
+    const StepComponent = this.steps[this.state.step];
 
     return (
       <StepComponent {...this.props} onComplete={this.onStepComplete} />

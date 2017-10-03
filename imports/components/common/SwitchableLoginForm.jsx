@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withApollo } from 'react-apollo';
 import { Components, registerComponent, withCurrentUser } from 'meteor/vulcan:core';
 
 const LOGIN_MODE = "login";
@@ -13,11 +14,11 @@ class SwitchableLoginForm extends React.Component {
       mode: LOGIN_MODE,
     };
 
-    this.doToggle = this.doToggle.bind(this);
+    this.handleGuestLogin = this.handleGuestLogin.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
   }
 
-
-  doToggle() {
+  handleToggle() {
     this.setState(({ mode }) => {
       if (mode === LOGIN_MODE) {
         return { mode: SIGNUP_MODE };
@@ -27,12 +28,23 @@ class SwitchableLoginForm extends React.Component {
     });
   }
 
+  handleGuestLogin() {
+    if (this.props.currentUser && this.props.currentUser.isGuest) {
+      this.props.onComplete();
+      return;
+    }
+
+    Meteor.loginVisitor(null, (err) => {
+      this.props.client.resetStore();
+    });
+  }
+
   switchToLoginButton() {
     return {
       id: 'switchToLogin',
       label: 'Log in',
       type: 'link',
-      onClick: this.doToggle
+      onClick: this.handleToggle
     }
   }
 
@@ -41,11 +53,11 @@ class SwitchableLoginForm extends React.Component {
       id: 'switchToSignup',
       label: 'Create new account',
       type: 'link',
-      onClick: this.doToggle
+      onClick: this.handleToggle
     }
   }
 
-  render() {
+  renderLoginForm() {
     if (this.state.mode === LOGIN_MODE) {
       return (
         <Components.SimpleLoginForm onComplete={this.props.onComplete} otherButtons={[this.switchToSignupButton()]} />
@@ -57,12 +69,21 @@ class SwitchableLoginForm extends React.Component {
     );
   }
 
+  render() {
+    return (
+      <div className="login-switcher">
+        {this.renderLoginForm()}
+        <p>
+          Or <a href="#" onClick={this.handleGuestLogin}>continue as a guest</a>
+        </p>
+      </div>
+    );
+  }
+
 }
 
 SwitchableLoginForm.propTypes = {
   onComplete: PropTypes.func,
 }
 
-registerComponent('SwitchableLoginForm', SwitchableLoginForm);
-
-export default SwitchableLoginForm;
+registerComponent('SwitchableLoginForm', SwitchableLoginForm, withCurrentUser, withApollo);
