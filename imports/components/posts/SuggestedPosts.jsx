@@ -63,24 +63,32 @@ class SuggestedPosts extends React.Component {
   constructor(props) {
     super(props);
 
-    this.doSearch = this.doSearch.bind(this);
+    this.handleQueryUpdate = this.handleQueryUpdate.bind(this);
+    this.handleCreate = this.handleCreate.bind(this);
+
     this.state = {
       query: "",
-    }
+      debouncedQuery: "",
+    };
   }
 
   searchTerms() {
     return {
-      query: this.state.query
+      query: this.state.debouncedQuery
     };
   }
 
-  doSearch(evt) {
+  handleQueryUpdate(evt) {
     const query = evt.target.value;
+    this.setState({ query });
 
     delay(() => {
-      this.setState({ query });
+      this.setState({ debouncedQuery: query });
     }, 700 );
+  }
+
+  handleCreate() {
+    this.props.onComplete({ title: this.state.query });
   }
 
   render() {
@@ -89,11 +97,11 @@ class SuggestedPosts extends React.Component {
         <form>
           <label>
             <p>How would you like to improve Network Canvas?</p>
-            <input type="text" onChange={this.doSearch} />
+            <input type="text" onChange={this.handleQueryUpdate} />
           </label>
         </form>
         <WrappedSuggestionList terms={this.searchTerms()} />
-        <button className="btn btn-primary" onClick={this.props.onComplete}>
+        <button className="btn btn-primary" onClick={this.handleCreate}>
           Create a new post
         </button>
       </div>

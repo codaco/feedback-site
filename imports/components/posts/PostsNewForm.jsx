@@ -39,6 +39,7 @@ const PostsNewForm = (props, context) =>
           collection={Posts}
           schema={formSchema}
           mutationFragment={getFragment('PostsPage')}
+          prefilledProps={ { title: props.title, body: props.body } }
           successCallback={post => {
             props.closeModal();
             props.router.push({pathname: props.redirect || Posts.getPageUrl(post)});
@@ -53,6 +54,8 @@ PostsNewForm.propTypes = {
   router: PropTypes.object,
   flash: PropTypes.func,
   redirect: PropTypes.string,
+  title: PropTypes.string,
+  body: PropTypes.string,
 }
 
 PostsNewForm.contextTypes = {

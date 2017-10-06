@@ -3,68 +3,58 @@ import { Components, registerComponent, getComponent, withCurrentUser } from 'me
 import { withRouter } from 'react-router'
 import Users from 'meteor/vulcan:users';
 import {Button} from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
-class UserLogin extends React.Component {
-  componentWillMount() {
-    if (this.props.currentUser && !this.props.currentUser.isGuest) {
-      // Skip this step for non-guest users
-      this.props.onComplete();
-    }
-  }
-
-  render() {
-    return (
-      <Components.SwitchableLoginForm onComplete={this.props.onComplete} />
-    )
-  }
-}
-
-const SuggestRelated = (props) => {
-  return (
-    <div>
-      No Suggestions
-      <Button bsStyle="primary" onClick={(ev) => props.onComplete()}>Next</Button>
-    </div>
-  )
-}
+const SUGGEST_STEP = 'suggest';
+const CREATE_STEP = 'create';
 
 class CreatePostFlow extends React.Component {
   constructor(props) {
     super(props)
-    this.onStepComplete = this.onStepComplete.bind(this);
+
+    this.handleSuggestComplete = this.handleSuggestComplete.bind(this);
+    this.handlePostCreated = this.handlePostCreated.bind(this);
 
     this.state = {
-      step: 0
-    }
+      step: SUGGEST_STEP,
+      title: '',
+    };
   }
 
-  get steps() {
-    return [
-      UserLogin,
-      getComponent('SuggestedPosts'),
-      getComponent('PostsNewForm'),
-    ];
+  handlePostCreated(post) {
+    this.props.router.push(redirect);
   }
 
-  onStepComplete(redirect) {
-    console.log("Complete!")
-    if (redirect) {
-      this.props.router.push(redirect);
-    } else {
-      this.setState((prevState) => {
-        const state = { step: prevState.step + 1 };
-        return state;
-      });
-    }
+  handleSuggestComplete(data) {
+    this.setState({
+      step: CREATE_STEP,
+      title: data.title,
+    });
   }
 
   render() {
-    const StepComponent = this.steps[this.state.step];
+    if (!this.props.currentUser || this.props.currentUser.isGuest) {
+      // ask logged out people and guest users if they want to log in
+      return (
+        <Components.SwitchableLoginForm />
+      )
+    }
 
-    return (
-      <StepComponent {...this.props} onComplete={this.onStepComplete} />
-    )
+    if (this.state.step === SUGGEST_STEP) {
+      return (
+        <Components.SuggestedPosts onComplete={this.handleSuggestComplete} />
+      );
+    } else {
+      return (
+        <Components.PostsNewForm title={this.state.title} closeModal={this.props.closeModal} />
+      );
+    }
   }
 }
+
+CreatePostFlow.propTypes = {
+  closeModal: PropTypes.func,
+}
+
 
 registerComponent('CreatePostFlow', CreatePostFlow, withCurrentUser, withRouter);
