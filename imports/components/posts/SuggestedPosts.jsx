@@ -95,17 +95,21 @@ class SuggestedPosts extends React.Component {
     return (
       <div>
         <form>
-          <label>
-            <p>How would you like to improve Network Canvas?</p>
-            <input type="text" onChange={this.handleQueryUpdate} />
-          </label>
+          <div className="form-group">
+            <label htmlFor="postTitle">
+              How would you like to improve Network Canvas?
+            </label>
+            <input type="text" className="form-control" id="postTitle" onChange={this.handleQueryUpdate} />
+          </div>
+
+          <WrappedSuggestionList terms={this.searchTerms()} />
+
+          <button type="submit" className="btn btn-primary" onClick={this.handleCreate}>
+            Create a new post
+          </button>
         </form>
-        <WrappedSuggestionList terms={this.searchTerms()} />
-        <button className="btn btn-primary" onClick={this.handleCreate}>
-          Create a new post
-        </button>
       </div>
-    )
+    );
   }
 }
 
