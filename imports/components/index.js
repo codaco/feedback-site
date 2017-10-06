@@ -1,7 +1,6 @@
 // common
 
 import './common/Layout.jsx';
-import './common/Footer.jsx';
 import './common/Header.jsx';
 import './common/Logo.jsx';
 import './common/Flash.jsx';

@@ -66,23 +66,6 @@
   margin-bottom: $vmargin;
 }
 
-.posts-load-more, .comments-load-more{
-  display: block;
-  text-align: center;
-  @include border;
-  @include border-radius;
-  font-size: $font-size-large;
-  padding: 10px 20px;
-  @include activeHover;
-  width: 100%;
-  background: $white;
-  color: $active-color;
-}
-
-.posts-load-more-loading{
-  padding: 21px 0;
-}
-
 //////////////////////////////////////////////////////
 // Post Item                                        //
 //////////////////////////////////////////////////////

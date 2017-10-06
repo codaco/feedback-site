@@ -18,15 +18,16 @@ const Layout = ({currentUser, children, currentRoute}) =>
 
     <Components.Header />
 
-    <div className="main">
+    <div className="container">
 
       <Components.FlashMessages />
 
       {children}
 
+      <p className="text-center">
+        <a href="http://networkcanvas.com" target="_blank">Network Canvas homepage</a>
+      </p>
     </div>
-
-    <Components.Footer />
 
   </div>
 

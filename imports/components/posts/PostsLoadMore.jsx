@@ -4,16 +4,20 @@ import { FormattedMessage } from 'meteor/vulcan:i18n';
 import classNames from 'classnames';
 
 const PostsLoadMore = ({loading, loadMore, count, totalCount}) => {
+  if (loading) {
+    return (
+      <Components.Loading />
+    );
+  }
+
   return (
-    <div className={classNames('posts-load-more', {'posts-load-more-loading': loading})}>
-      <a className="posts-load-more-link" href="#" onClick={e => {e.preventDefault(); loadMore();}}>
-        <span><FormattedMessage id="posts.load_more"/></span>
-        &nbsp;
-        {totalCount ? <span className="load-more-count">{`(${count}/${totalCount})`}</span> : null}
-      </a>
-      {loading ? <div className="posts-load-more-loader"><Components.Loading/></div> : null}
-    </div>
-  )
+    <button type="button" className="btn btn-default btn-block" onClick={e => {e.preventDefault(); loadMore();}}>
+      <span><FormattedMessage id="posts.load_more"/></span>
+      &nbsp;
+      {totalCount ? <span className="load-more-count">{`(${count}/${totalCount})`}</span> : null}
+
+    </button>
+  );
 }
 
 PostsLoadMore.displayName = "PostsLoadMore";

@@ -19,11 +19,12 @@ class SuggestionList extends React.Component {
 
   renderPostRow(post) {
     return (
-      <li key={post._id}>
-        <Link to={Posts.getLink(post)}>
-          {post.title}
-        </Link>
-      </li>
+      <Link key={post._id} className="list-group-item" to={Posts.getLink(post)}>
+        <h4 className="list-group-item-heading">{post.title}</h4>
+        {post.body ?
+          <div className="list-group-item-text">{post.body.slice(0, 200)}</div> : null
+        }
+      </Link>
     );
   }
 
@@ -43,9 +44,9 @@ class SuggestionList extends React.Component {
     return (
       <div>
         <p>Comment on an existing suggestion:</p>
-        <ul>
+        <div className="list-group">
           {posts}
-        </ul>
+        </div>
       </div>
     )
   }
