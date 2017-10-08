@@ -38,6 +38,7 @@ const PostsNewForm = (props, context) =>
         <Components.SmartForm
           collection={Posts}
           schema={formSchema}
+          layout="vertical"
           mutationFragment={getFragment('PostsPage')}
           prefilledProps={ { title: props.title, body: props.body } }
           successCallback={post => {

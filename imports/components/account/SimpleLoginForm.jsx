@@ -80,7 +80,6 @@ class SimpleLoginForm extends React.Component {
       },
     ].concat(this.props.otherButtons || []);
 
-    console.log("gettin buttons", buttons)
     return _.indexBy(buttons, 'id');
   }
 

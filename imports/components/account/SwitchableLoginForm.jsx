@@ -71,7 +71,7 @@ class SwitchableLoginForm extends React.Component {
 
   render() {
     return (
-      <div className="login-switcher">
+      <div>
         {this.renderLoginForm()}
         <p>
           Or <a href="#" onClick={this.handleGuestLogin}>continue as a guest</a>

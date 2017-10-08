@@ -5,8 +5,7 @@ import { FormattedMessage, intlShape } from 'meteor/vulcan:i18n';
 import Button from 'react-bootstrap/lib/Button';
 
 const PostsNewButton = (props, context) => {
-
-  const size = props.currentUser ? 'large' : 'small';
+  const size = 'large';
   const button = <Button className="posts-new-button" bsStyle="primary"><Components.Icon name="new"/> <FormattedMessage id="posts.new_post"/></Button>;
   return (
     <Components.ModalTrigger size={size} title={context.intl.formatMessage({ id: 'posts.new_post' })} component={button}>

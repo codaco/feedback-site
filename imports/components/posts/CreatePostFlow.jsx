@@ -5,6 +5,7 @@ import Users from 'meteor/vulcan:users';
 import {Button} from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
+const LOGIN_STEP = 'login';
 const SUGGEST_STEP = 'suggest';
 const CREATE_STEP = 'create';
 
@@ -12,17 +13,31 @@ class CreatePostFlow extends React.Component {
   constructor(props) {
     super(props)
 
+    this.handleLoginComplete = this.handleLoginComplete.bind(this);
     this.handleSuggestComplete = this.handleSuggestComplete.bind(this);
     this.handlePostCreated = this.handlePostCreated.bind(this);
 
     this.state = {
-      step: SUGGEST_STEP,
+      step: this.initialStep(),
       title: '',
     };
   }
 
+  initialStep() {
+    if (!this.props.currentUser || this.props.currentUser.isGuest) {
+      return LOGIN_STEP;
+    }
+    return SUGGEST_STEP;
+  }
+
   handlePostCreated(post) {
     this.props.router.push(redirect);
+  }
+
+  handleLoginComplete() {
+    this.setState({
+      step: SUGGEST_STEP
+    });
   }
 
   handleSuggestComplete(data) {
@@ -32,22 +47,23 @@ class CreatePostFlow extends React.Component {
     });
   }
 
-  render() {
-    if (!this.props.currentUser || this.props.currentUser.isGuest) {
-      // ask logged out people and guest users if they want to log in
-      return (
-        <Components.SwitchableLoginForm />
-      )
-    }
+  renderLogin() {
+    return (
+      <div>
+        <p>Please log in to create a post.</p>
+        <Components.SwitchableLoginForm onComplete={this.handleLoginComplete}/>
+      </div>
+    )
+  }
 
-    if (this.state.step === SUGGEST_STEP) {
-      return (
-        <Components.SuggestedPosts onComplete={this.handleSuggestComplete} />
-      );
-    } else {
-      return (
-        <Components.PostsNewForm title={this.state.title} closeModal={this.props.closeModal} />
-      );
+  render() {
+    switch (this.state.step) {
+      case LOGIN_STEP:
+        return this.renderLogin();
+      case SUGGEST_STEP:
+        return (<Components.SuggestedPosts onComplete={this.handleSuggestComplete} />);
+      case CREATE_STEP:
+        return (<Components.PostsNewForm title={this.state.title} closeModal={this.props.closeModal} />);
     }
   }
 }

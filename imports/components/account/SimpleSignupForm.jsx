@@ -38,7 +38,10 @@ class SimpleSignupForm extends React.Component {
 
   onSignedIn() {
     this.props.client.resetStore();
-    this.props.onComplete();
+
+    if (typeof this.props.onComplete === 'function') {
+      this.props.onComplete();
+    }
   }
 
   signUp() {
@@ -135,7 +138,7 @@ class SimpleSignupForm extends React.Component {
 }
 
 SimpleSignupForm.propTypes = {
-  onComplete: PropTypes.func.isRequired,
+  onComplete: PropTypes.func,
   otherButtons: PropTypes.array,
 };
 

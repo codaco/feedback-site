@@ -4,13 +4,15 @@ import './common/Layout.jsx';
 import './common/Header.jsx';
 import './common/Logo.jsx';
 import './common/Flash.jsx';
-import './common/GuestLoginForm.jsx';
-import './common/SimpleLoginForm.jsx';
-import './common/SimpleSignupForm.jsx';
-import './common/SwitchableLoginForm.jsx';
 import './common/FlashMessages.jsx';
 import './common/SearchForm.jsx';
 import './common/Vote.jsx';
+
+// account/login
+
+import './account/SimpleLoginForm.jsx';
+import './account/SimpleSignupForm.jsx';
+import './account/SwitchableLoginForm.jsx';
 
 // posts
 
