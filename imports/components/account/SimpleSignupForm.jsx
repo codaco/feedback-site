@@ -89,7 +89,7 @@ class SimpleSignupForm extends React.Component {
         className: 'active',
         onClick: this.signUp.bind(this),
       },
-    ].concat(this.props.otherButtons);
+    ].concat(this.props.otherButtons || []);
 
     return _.indexBy(buttons, 'id');
   }

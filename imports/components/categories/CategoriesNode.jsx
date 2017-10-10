@@ -23,12 +23,7 @@ class CategoriesNode extends PureComponent {
     const category = this.props.category;
     const children = this.props.category.childrenResults;
 
-    return (
-      <div className="categories-node">
-        {this.renderCategory(category)}
-        {children ? this.renderChildren(children) : null}
-      </div>
-    )
+    return this.renderCategory(category);
   }
 
 }

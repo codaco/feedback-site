@@ -6,7 +6,6 @@ import Button from 'react-bootstrap/lib/Button';
 import DropdownButton from 'react-bootstrap/lib/DropdownButton';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
 import { withRouter } from 'react-router'
-import { LinkContainer } from 'react-router-bootstrap';
 import Categories from 'meteor/vulcan:categories';
 import { withApollo } from 'react-apollo';
 
@@ -50,10 +49,10 @@ class CategoriesList extends PureComponent {
     const categoriesClone = _.map(categories, category => {
       return {
         ...category, // we don't want to modify the objects we got from props
-        active: currentCategory && category.slug === currentCategory.slug, 
+        active: currentCategory && category.slug === currentCategory.slug,
         expanded: parentCategories && _.contains(_.pluck(parentCategories, 'slug'), category.slug)
       };
-    }); 
+    });
 
     const nestedCategories = Utils.unflatten(categoriesClone, {idProperty: '_id', parentIdProperty: 'parentId'});
 
@@ -74,13 +73,9 @@ class CategoriesList extends PureComponent {
           title={<FormattedMessage id="categories"/>}
           id="categories-dropdown"
         >
-          <div className="category-menu-item category-menu-item-all dropdown-item">
-            <LinkContainer className="category-menu-item-title" to={{pathname:"/", query: allCategoriesQuery}}>
-              <MenuItem eventKey={0}>
-                <FormattedMessage id="categories.all"/>
-              </MenuItem>
-            </LinkContainer>
-          </div>
+          <MenuItem href="/" eventKey={0} active={!this.props.router.location.query.cat}>
+            <FormattedMessage id="categories.all"/>
+          </MenuItem>
           {
             // categories data are loaded
             !this.props.loading ?
@@ -93,11 +88,14 @@ class CategoriesList extends PureComponent {
             : <div className="dropdown-item"><MenuItem><Components.Loading /></MenuItem></div>
           }
           <Components.ShowIf check={Categories.options.mutations.new.check}>
-            <div className="categories-new-button category-menu-item dropdown-item">
+            <MenuItem divider />
+          </Components.ShowIf>
+          <Components.ShowIf check={Categories.options.mutations.new.check}>
+            <MenuItem eventKey="edit">
               <ModalTrigger title={<FormattedMessage id="categories.new"/>} component={<Button bsStyle="primary"><FormattedMessage id="categories.new"/></Button>}>
                 <Components.CategoriesNewForm/>
               </ModalTrigger>
-            </div>
+            </MenuItem>
           </Components.ShowIf>
         </DropdownButton>
 

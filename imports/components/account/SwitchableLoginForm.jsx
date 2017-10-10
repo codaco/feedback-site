@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import PropTypes from 'prop-types';
 import { withApollo } from 'react-apollo';
 import { Components, registerComponent, withCurrentUser } from 'meteor/vulcan:core';
@@ -57,15 +58,20 @@ class SwitchableLoginForm extends React.Component {
     }
   }
 
+  renderToggleLink() {
+    const text = (this.state.mode === LOGIN_MODE) ? "Create new account" : "Log in";
+    return (<a href="#" onClick={this.handleToggle}>{text}</a>);
+  }
+
   renderLoginForm() {
     if (this.state.mode === LOGIN_MODE) {
       return (
-        <Components.SimpleLoginForm onComplete={this.props.onComplete} otherButtons={[this.switchToSignupButton()]} />
+        <Components.SimpleLoginForm onComplete={this.props.onComplete} />
       );
     }
 
     return (
-      <Components.SimpleSignupForm onComplete={this.props.onComplete} otherButtons={[this.switchToLoginButton()]} />
+      <Components.SimpleSignupForm onComplete={this.props.onComplete} />
     );
   }
 
@@ -73,6 +79,12 @@ class SwitchableLoginForm extends React.Component {
     return (
       <div>
         {this.renderLoginForm()}
+        <p>
+          {this.renderToggleLink()}
+        </p>
+        <p>
+          <Link to="/reset-password">Forgot password</Link>
+        </p>
         <p>
           Or <a href="#" onClick={this.handleGuestLogin}>continue as a guest</a>
         </p>

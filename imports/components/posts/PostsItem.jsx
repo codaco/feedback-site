@@ -43,7 +43,7 @@ class PostsItem extends PureComponent {
         <div className="posts-item-content">
 
           <h3 className="posts-item-title">
-            <Link to={Posts.getLink(post)} className="posts-item-title-link" target={Posts.getLinkTarget(post)}>
+            <Link to={Posts.getPageUrl(post)} className="posts-item-title-link">
               {post.title}
             </Link>
             {this.renderCategories()}

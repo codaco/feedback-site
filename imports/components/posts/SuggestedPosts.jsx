@@ -19,7 +19,7 @@ class SuggestionList extends React.Component {
 
   renderPostRow(post) {
     return (
-      <Link key={post._id} className="list-group-item" to={Posts.getLink(post)}>
+      <Link key={post._id} className="list-group-item" to={Posts.getPageUrl(post)}>
         <h4 className="list-group-item-heading">{post.title}</h4>
         {post.body ?
           <div className="list-group-item-text">{post.body.slice(0, 200)}</div> : null

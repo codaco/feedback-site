@@ -24,9 +24,11 @@ const Layout = ({currentUser, children, currentRoute}) =>
 
       {children}
 
-      <p className="text-center">
-        <a href="http://networkcanvas.com" target="_blank">Network Canvas homepage</a>
-      </p>
+      <footer className="footer">
+        <p>
+          <a href="http://networkcanvas.com" target="_blank">Network Canvas homepage</a>
+        </p>
+      </footer>
     </div>
 
   </div>
