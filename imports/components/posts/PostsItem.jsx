@@ -51,8 +51,10 @@ class PostsItem extends PureComponent {
 
           <div className="posts-item-meta">
             <div className="posts-item-user">
+              <Components.UsersAvatar user={post.user} size="small" />
               <Components.UsersName user={post.user} />
             </div>
+
             <div className="posts-item-date">{post.postedAt ? moment(new Date(post.postedAt)).fromNow() : <FormattedMessage id="posts.dateNotDefined"/>}</div>
             <div className="posts-item-comments">
               <Link to={Posts.getPageUrl(post)}>

@@ -3,7 +3,7 @@ import { SyncedCron } from 'meteor/percolatestudio:synced-cron';
 import Posts from '../collection.js';
 
 SyncedCron.options = {
-  log: true,
+  log: false,
   collectionName: 'cronHistory',
   utc: false,
   collectionTTL: 172800

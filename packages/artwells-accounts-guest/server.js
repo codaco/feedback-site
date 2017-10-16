@@ -1,10 +1,10 @@
 import { AccountsGuest } from './common';
+import moment from 'moment';
 export * from './common';
 
 Accounts.removeOldGuests = function (before) {
     if (typeof before === 'undefined') {
-        before = new Date();
-        before.setHours(before.getHours() - 1);
+        before = moment().subtract(1, 'days').toDate();
     }
     res = Meteor.users.remove({createdAt: {$lte: before}, 'profile.guest': true});
     return res;

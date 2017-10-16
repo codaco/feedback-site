@@ -6,20 +6,25 @@ import { Link } from 'react-router';
 import classNames from 'classnames';
 
 const UsersAvatar = ({className, user, link}) => {
+  const gravatarUrl = user.avatarUrl || Users.avatar.getGravatarUrl(user);
 
-  const avatarUrl = user.avatarUrl || Users.avatar.getUrl(user);
+  let avatar;
+  if (Users.isGuest(user)) {
+    avatar = <img className="avatar-image" src={Users.avatar.options.defaultImageUrl} title="Guest"/>;
+  } else if (gravatarUrl) {
+    avatar = <img alt={Users.getDisplayName(user)} className="avatar-image" src={gravatarUrl} title={user.username}/>;
+  } else {
+    avatar = <span className="avatar-initials"><span>{Users.avatar.getInitials(user) || '?'}</span></span>;
+  }
 
-  const img = <img alt={Users.getDisplayName(user)} className="avatar-image" src={avatarUrl} title={user.username}/>;
-  const initials = <span className="avatar-initials"><span>{Users.avatar.getInitials(user)}</span></span>;
-
-  const avatar = avatarUrl ? img : initials;
+  const url = Users.getProfileUrl(user);
 
   return (
     <div className={classNames('avatar', className)}>
-      {link ? 
-        <Link to={Users.getProfileUrl(user)}>
+      {link && url ?
+        <Link to={url}>
           <span>{avatar}</span>
-        </Link> 
+        </Link>
         : <span>{avatar}</span>
       }
     </div>

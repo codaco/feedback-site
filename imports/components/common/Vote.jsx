@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withVote, hasUpvoted, hasDownvoted } from 'meteor/vulcan:voting';
 import { /*FormattedMessage,*/ intlShape } from 'meteor/vulcan:i18n';
+import Users from 'meteor/vulcan:users';
 
 class Vote extends PureComponent {
 
@@ -22,7 +23,7 @@ class Vote extends PureComponent {
 
   note: with optimisitc UI, loading functions are not needed
   also, setState triggers issues when the component is unmounted
-  before the vote mutation returns. 
+  before the vote mutation returns.
 
   */
 
@@ -43,7 +44,7 @@ class Vote extends PureComponent {
     const collection = this.props.collection;
     const user = this.props.currentUser;
 
-    if(!user){
+    if (Users.isGuest(user)) {
       this.props.flash(this.context.intl.formatMessage({id: 'users.please_log_in'}));
       // this.stopLoading();
     } else {
@@ -51,7 +52,7 @@ class Vote extends PureComponent {
       this.props.vote({document, voteType, collection, currentUser: this.props.currentUser}).then(result => {
         // this.stopLoading();
       });
-    } 
+    }
   }
 
   getActionClass() {
@@ -61,7 +62,7 @@ class Vote extends PureComponent {
     const isUpvoted = hasUpvoted(user, document);
     const isDownvoted = hasDownvoted(user, document);
     const actionsClass = classNames(
-      'vote', 
+      'vote',
       {voted: isUpvoted || isDownvoted},
       {upvoted: isUpvoted},
       {downvoted: isDownvoted}
