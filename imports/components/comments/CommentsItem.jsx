@@ -9,16 +9,21 @@ class CommentsItem extends PureComponent {
 
   constructor() {
     super();
-    ['showReply', 'replyCancelCallback', 'replySuccessCallback', 'showEdit', 'editCancelCallback', 'editSuccessCallback', 'removeSuccessCallback'].forEach(methodName => {this[methodName] = this[methodName].bind(this)});
+    [
+      'handleReply', 'replyCancelCallback', 'replySuccessCallback', 'showEdit',
+      'editCancelCallback', 'editSuccessCallback', 'removeSuccessCallback'
+    ].forEach(methodName => { this[methodName] = this[methodName].bind(this) });
+
     this.state = {
       showReply: false,
       showEdit: false
     };
   }
 
-  showReply(event) {
+  handleReply(event) {
     event.preventDefault();
-    this.setState({showReply: true});
+
+    this.props.onNewComment(this.props.comment);
   }
 
   replyCancelCallback(event) {
@@ -60,7 +65,7 @@ class CommentsItem extends PureComponent {
       <div className="comments-item-text">
         <div dangerouslySetInnerHTML={htmlBody}></div>
         { showReplyButton ?
-          <a className="comments-item-reply-link" onClick={this.showReply}>
+          <a className="comments-item-reply-link" onClick={this.handleReply}>
             <Components.Icon name="reply"/> <FormattedMessage id="comments.reply"/>
           </a> : null}
       </div>
@@ -121,6 +126,7 @@ class CommentsItem extends PureComponent {
 
 CommentsItem.propTypes = {
   comment: PropTypes.object.isRequired, // the current comment
+  onNewComment: PropTypes.func.isRequired,
   currentUser: PropTypes.object,
 };
 

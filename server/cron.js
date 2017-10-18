@@ -16,7 +16,6 @@ const addJob = function () {
       return parser.text('every 5 minutes');
     },
     job() {
-      console.log("Removing guests older than 1 day");
       const before = moment().subtract(1, 'days').toDate();
       Accounts.removeOldGuests(before);
     }

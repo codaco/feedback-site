@@ -2,12 +2,14 @@ import { Components, registerComponent } from 'meteor/vulcan:core';
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-const CommentsNode = ({ comment, currentUser }) =>
+const CommentsNode = ({ comment, currentUser, onNewComment }) =>
   <div className="comments-node">
-    <Components.CommentsItem currentUser={currentUser} comment={comment} key={comment._id} />
-    {comment.childrenResults ? 
+    <Components.CommentsItem currentUser={currentUser} comment={comment} key={comment._id} onNewComment={onNewComment}/>
+    {comment.childrenResults ?
       <div className="comments-children">
-        {comment.childrenResults.map(comment => <CommentsNode currentUser={currentUser} comment={comment} key={comment._id} />)}
+        {comment.childrenResults.map(comment =>
+          <CommentsNode currentUser={currentUser} comment={comment} key={comment._id} onNewComment={onNewComment} />)
+        }
       </div>
       : null
     }

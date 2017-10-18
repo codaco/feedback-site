@@ -2,12 +2,14 @@ import { Components, registerComponent } from 'meteor/vulcan:core';
 import React from 'react';
 import { FormattedMessage } from 'meteor/vulcan:i18n';
 
-const CommentsList = ({comments, commentCount, currentUser}) => {
+const CommentsList = ({comments, commentCount, currentUser, onNewComment}) => {
 
   if (commentCount > 0) {
     return (
       <div className="comments-list">
-        {comments.map(comment => <Components.CommentsNode currentUser={currentUser} comment={comment} key={comment._id} />)}
+        {comments.map(comment =>
+          <Components.CommentsNode currentUser={currentUser} comment={comment} key={comment._id} onNewComment={onNewComment} />)
+        }
         {/*hasMore ? (ready ? <Components.CommentsLoadMore loadMore={loadMore} count={count} totalCount={totalCount} /> : <Components.Loading/>) : null*/}
       </div>
     )
