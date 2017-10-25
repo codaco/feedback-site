@@ -34,8 +34,7 @@ registerFragment(`
     isAdmin
     isGuest
     htmlBio
-    twitterUsername
-    website
+    contactInfo
     groups
     karma
     # vulcan:posts

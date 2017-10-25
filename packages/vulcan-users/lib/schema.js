@@ -3,14 +3,14 @@ import Users from './collection.js';
 import { Utils } from 'meteor/vulcan:lib'; // import from vulcan:lib because vulcan:core isn't loaded yet
 
 ///////////////////////////////////////
-// Order for the Schema is as follows. Change as you see fit: 
-// 00. 
+// Order for the Schema is as follows. Change as you see fit:
+// 00.
 // 10. Display Name
 // 20. Email
-// 30. Bio 
+// 30. Bio
 // 40. Slug
-// 50. Website
-// 60. Twitter username
+// 50. Contact Info
+// 60. Twitter username (removed)
 // 70.
 // 80.
 // 90.
@@ -41,11 +41,6 @@ const schema = {
     optional: true,
     viewableBy: ['guests'],
     insertableBy: ['guests'],
-    onInsert: user => {
-      if (user.services && user.services.twitter && user.services.twitter.screenName) {
-        return user.services.twitter.screenName;
-      }
-    },
     searchable: true
   },
   emails: {
@@ -118,10 +113,8 @@ const schema = {
     order: 10,
     onInsert: (user, options) => {
       const profileName = Utils.getNestedProperty(user, 'profile.name');
-      const twitterName = Utils.getNestedProperty(user, 'services.twitter.screenName');
       const linkedinFirstName = Utils.getNestedProperty(user, 'services.linkedin.firstName');
       if (profileName) return profileName;
-      if (twitterName) return twitterName;
       if (linkedinFirstName) return `${linkedinFirstName} ${Utils.getNestedProperty(user, 'services.linkedin.lastName')}`;
       if (user.username) return user.username;
       return undefined;
@@ -190,11 +183,7 @@ const schema = {
     optional: true,
     viewableBy: ['guests'],
     onInsert: user => {
-
-      const twitterAvatar = Utils.getNestedProperty(user, 'services.twitter.profile_image_url_https');
       const facebookId = Utils.getNestedProperty(user, 'services.facebook.id');
-
-      if (twitterAvatar) return twitterAvatar;
       if (facebookId) return `https://graph.facebook.com/${facebookId}/picture?type=large`;
       return undefined;
 
@@ -245,41 +234,16 @@ const schema = {
     }
   },
   /**
-    A link to the user's homepage
+   Contact info for the user
   */
-  website: {
+  contactInfo: {
     type: String,
-    regEx: SimpleSchema.RegEx.Url,
     optional: true,
     control: "text",
     insertableBy: ['members'],
     editableBy: ['members'],
     viewableBy: ['guests'],
     order: 50,
-  },
-    /**
-    The user's Twitter username
-  */
-  twitterUsername: {
-    type: String,
-    optional: true,
-    control: "text",
-    insertableBy: ['members'],
-    editableBy: ['members'],
-    viewableBy: ['guests'],
-    order: 60,
-    resolveAs: {
-      fieldName: 'twitterUsername',
-      type: 'String',
-      resolver: (user, args, context) => {
-        return context.Users.getTwitterName(context.Users.findOne(user._id));
-      },
-    },
-    onInsert: user => {
-      if (user.services && user.services.twitter && user.services.twitter.screenName) {
-        return user.services.twitter.screenName;
-      }
-    }
   },
   /**
     Groups

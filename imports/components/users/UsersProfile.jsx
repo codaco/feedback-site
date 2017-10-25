@@ -4,38 +4,62 @@ import { FormattedMessage } from 'meteor/vulcan:i18n';
 import Users from 'meteor/vulcan:users';
 import { Link } from 'react-router';
 
-const UsersProfile = (props) => {
-  if (props.loading) {
+class UsersProfile extends React.Component {
+  get user() {
+    return this.props.document;
+  }
 
-    return <div className="page users-profile"><Components.Loading/></div>
-
-  } else if (!props.document) {
-
-    console.log(`// missing user (_id/slug: ${props.documentId || props.slug})`);
-    return <div className="page users-profile"><FormattedMessage id="app.404"/></div>
-
-  } else {
-
-    const user = props.document;
-
-    const terms = {view: "userPosts", userId: user._id};
+  renderBio() {
+    if (!this.user || !this.user.htmlBio) { return null; }
 
     return (
-      <div className="page users-profile">
-        <Components.HeadTags url={Users.getProfileUrl(user, true)} title={Users.getDisplayName(user)} />
-        <h2 className="page-title">{Users.getDisplayName(user)}</h2>
-        {user.htmlBio ? <div dangerouslySetInnerHTML={{__html: user.htmlBio}}></div> : null }
-        <ul>
-          {user.twitterUsername ? <li><a href={"http://twitter.com/" + user.twitterUsername}>@{user.twitterUsername}</a></li> : null }
-          {user.website ? <li><a href={user.website}>{user.website}</a></li> : null }
-          <Components.ShowIf check={Users.options.mutations.edit.check} document={user}>
-            <li><Link to={Users.getEditUrl(user)}><FormattedMessage id="users.edit_account"/></Link></li>
-          </Components.ShowIf>
-        </ul>
-        <h3><FormattedMessage id="users.posts"/></h3>
-        <Components.PostsList terms={terms} showHeader={false} />
+      <div className="row">
+        <label className="col-sm-2"><FormattedMessage id="users.bio" /></label>
+        <div className="col-sm-10" dangerouslySetInnerHTML={{__html: this.user.htmlBio}}></div>
       </div>
-    )
+    );
+  }
+
+  renderContactInfo() {
+    if (!this.user || !this.user.contactInfo) { return null; }
+
+    return (
+      <div className="row">
+        <label className="col-sm-2"><FormattedMessage id="users.contactInfo" /></label>
+        <div className="col-sm-10">{this.user.contactInfo}</div>
+      </div>
+    );
+  }
+
+  render() {
+    if (this.props.loading) {
+      return <div className="page users-profile"><Components.Loading /></div>
+    } else if (!this.user) {
+      console.log(`// missing user (_id/slug: ${this.props.documentId || this.props.slug})`);
+      return <div className="page users-profile"><FormattedMessage id="app.404" /></div>
+    } else {
+      const user = this.user;
+
+      const terms = { view: "userPosts", userId: user._id };
+
+      return (
+        <div className="page users-profile">
+          <Components.HeadTags url={Users.getProfileUrl(user, true)} title={Users.getDisplayName(user)} />
+          <h2>{Users.getDisplayName(user)}</h2>
+          <Components.ShowIf check={Users.options.mutations.edit.check} document={user}>
+            <Link to={Users.getEditUrl(user)}><FormattedMessage id="users.edit_account" /></Link>
+          </Components.ShowIf>
+
+          <hr />
+
+          {this.renderBio()}
+          {this.renderContactInfo()}
+
+          <h3><FormattedMessage id="users.posts" /></h3>
+          <Components.PostsList terms={terms} showHeader={false} />
+        </div>
+      )
+    }
   }
 }
 

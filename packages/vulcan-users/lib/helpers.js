@@ -30,11 +30,9 @@ Users.getUser = function (userOrUserId) {
  * @param {Object} user
  */
 Users.getUserName = function (user) {
-  try{
+  try {
     if (user.username)
       return user.username;
-    if (user && user.services && user.services.twitter && user.services.twitter.screenName)
-      return user.services.twitter.screenName;
   }
   catch (error){
     console.log(error); // eslint-disable-line
@@ -84,38 +82,6 @@ Users.getEditUrl = function (user, isAbsolute) {
 };
 
 /**
- * @summary Get a user's Twitter name
- * @param {Object} user
- */
-Users.getTwitterName = function (user) {
-  // return twitter name provided by user, or else the one used for twitter login
-  if (typeof user !== "undefined") {
-    if (user.twitterUsername) {
-      return user.profile.twitter;
-    } else if(Utils.checkNested(user, 'services', 'twitter', 'screenName')) {
-      return user.services.twitter.screenName;
-    }
-  }
-  return null;
-};
-Users.getTwitterNameById = function (userId) {return Users.getTwitterName(Users.findOne(userId));};
-
-/**
- * @summary Get a user's GitHub name
- * @param {Object} user
- */
-Users.getGitHubName = function (user) {
-  // return twitter name provided by user, or else the one used for twitter login
-  if(Utils.checkNested(user, 'profile', 'github')){
-    return user.profile.github;
-  }else if(Utils.checkNested(user, 'services', 'github', 'screenName')){ // TODO: double-check this with GitHub login
-    return user.services.github.screenName;
-  }
-  return null;
-};
-Users.getGitHubNameById = function (userId) {return Users.getGitHubName(Users.findOne(userId));};
-
-/**
  * @summary Get a user's email
  * @param {Object} user
  */
@@ -161,7 +127,7 @@ Users.getSetting = function (user = null, settingName, defaultValue = null) {
  * @param {Object} user
  */
 Users.hasCompletedProfile = function (user) {
-  
+
   if (!user) return false;
 
   return _.every(Users.getRequiredFields(), function (fieldName) {

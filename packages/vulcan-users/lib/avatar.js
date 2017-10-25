@@ -207,11 +207,7 @@ Users.avatar = {
 
     if (user) {
       svc = this.getService(user);
-      if (svc === 'twitter') {
-        // use larger image (200x200 is smallest custom option)
-        url = user.services.twitter.profile_image_url_https.replace('_normal.', '_200x200.');
-      }
-      else if (svc === 'facebook') {
+      if (svc === 'facebook') {
         // use larger image (~200x200)
         url = 'https://graph.facebook.com/' + user.services.facebook.id + '/picture/?type=large';
       }
