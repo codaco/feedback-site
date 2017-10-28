@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 /*
-  
+
   Messages actions
 
 */
@@ -45,23 +45,34 @@ addAction({
 
 
 /*
-  
+
   Messages reducers
 
 */
 
+function addFlash(state, action) {
+  if (state.some((message) =>
+      message.show === true && message.content === action.content)) {
+    // Don't add duplicate messages
+    return state;
+  }
+
+  const flashType = typeof action.flashType === 'undefined' ? 'error' : action.flashType;
+
+  return [
+    ...state,
+    { _id: state.length, content: action.content, flashType, seen: false, show: true },
+  ];
+}
+
 addReducer({
   messages: (state = [], action) => {
     // default values
-    const flashType = typeof action.flashType === 'undefined' ? 'error' : action.flashType;
     const currentMsg = typeof action.i === 'undefined' ? {} : state[action.i];
 
     switch(action.type) {
       case 'FLASH':
-        return [
-          ...state,
-          { _id: state.length, content: action.content, flashType, seen: false, show: true },
-        ];
+        return addFlash(state, action);
       case 'MARK_AS_SEEN':
         return [
           ...state.slice(0, action.i),
