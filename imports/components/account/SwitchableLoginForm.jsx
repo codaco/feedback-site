@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import PropTypes from 'prop-types';
-import { withApollo } from 'react-apollo';
-import { Components, registerComponent, withCurrentUser } from 'meteor/vulcan:core';
+import { Components, registerComponent } from 'meteor/vulcan:core';
 
 const LOGIN_MODE = "login";
 const SIGNUP_MODE = "signup";
@@ -15,7 +14,6 @@ class SwitchableLoginForm extends React.Component {
       mode: LOGIN_MODE,
     };
 
-    this.handleGuestLogin = this.handleGuestLogin.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
   }
 
@@ -26,17 +24,6 @@ class SwitchableLoginForm extends React.Component {
       }
 
       return { mode: LOGIN_MODE };
-    });
-  }
-
-  handleGuestLogin() {
-    if (this.props.currentUser && this.props.currentUser.isGuest) {
-      this.props.onComplete();
-      return;
-    }
-
-    Meteor.loginVisitor(null, (err) => {
-      this.props.client.resetStore();
     });
   }
 
@@ -86,7 +73,9 @@ class SwitchableLoginForm extends React.Component {
           <Link to="/reset-password">Forgot password</Link>
         </p>
         <p>
-          Or <a href="#" onClick={this.handleGuestLogin}>continue as a guest</a>
+          Or <Components.GuestLoginLink doneCallback={this.props.onComplete}>
+            continue as a guest
+          </Components.GuestLoginLink>
         </p>
       </div>
     );
@@ -98,4 +87,4 @@ SwitchableLoginForm.propTypes = {
   onComplete: PropTypes.func,
 }
 
-registerComponent('SwitchableLoginForm', SwitchableLoginForm, withCurrentUser, withApollo);
+registerComponent('SwitchableLoginForm', SwitchableLoginForm);

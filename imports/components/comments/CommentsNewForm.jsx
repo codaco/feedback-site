@@ -8,7 +8,9 @@ const LoggedOut = (props) => {
   return (
     <div>
       <span>Please log in or </span>
-      <Components.GuestLoginLink text="continue as a guest" />
+      <Components.GuestLoginLink>
+        continue as guest
+      </Components.GuestLoginLink>
       <span> in order to comment.</span>
     </div>
   )

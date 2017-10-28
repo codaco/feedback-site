@@ -9,7 +9,9 @@ class GuestLoginLink extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
+  handleClick(event) {
+    event.preventDefault();
+
     if (this.props.currentUser && this.props.currentUser.isGuest) {
       this.props.doneCallback();
     }
@@ -29,7 +31,7 @@ class GuestLoginLink extends React.Component {
 
     return (
       <a onClick={this.handleClick} href="#">
-        {this.props.text}
+        {this.props.children}
       </a>
     )
   }
@@ -37,7 +39,6 @@ class GuestLoginLink extends React.Component {
 }
 
 GuestLoginLink.propTypes = {
-  text: PropTypes.string.isRequired,
   doneCallback: PropTypes.func,
 }
 

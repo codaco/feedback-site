@@ -88,7 +88,8 @@ class SuggestedPosts extends React.Component {
     }, 700 );
   }
 
-  handleCreate() {
+  handleCreate(event) {
+    event.preventDefault();
     this.props.onComplete({ title: this.state.query });
   }
 
