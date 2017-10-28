@@ -27,7 +27,8 @@ class PostsCommentsThread extends React.Component {
 
   handleNewComment(replyComment = {}) {
     this.setState({ replyComment });
-    // TODO: focus and scroll?
+    window.scrollBy(0, 9999);   // Just scroll to the bottom of the page
+    // TODO: focus input
   }
 
   render() {
@@ -51,22 +52,15 @@ class PostsCommentsThread extends React.Component {
             commentCount={totalCount}
             onNewComment={this.handleNewComment}
           />
-          {!!currentUser ?
-            <div className="posts-comments-thread-new">
-              <h4><FormattedMessage id="comments.new"/></h4>
-              <Components.CommentsNewForm
-                key={this.state.replyComment._id}   // Add key so form re-initializes when initialBody changes :-(
-                postId={postId}
-                initialBody={this.prefilledReply()}
-                type="comment"
-              />
-            </div> :
-            <div>
-              <Components.ModalTrigger size="small" component={<a href="#"><FormattedMessage id="comments.please_log_in"/></a>}>
-                <Components.AccountsLoginForm/>
-              </Components.ModalTrigger>
-            </div>
-          }
+          <div className="posts-comments-thread-new">
+            <h4><FormattedMessage id="comments.new"/></h4>
+            <Components.CommentsNewForm
+              key={this.state.replyComment._id}   // Add key so form re-initializes when initialBody changes :-(
+              postId={postId}
+              initialBody={this.prefilledReply()}
+              type="comment"
+            />
+          </div>
         </div>
       );
     }

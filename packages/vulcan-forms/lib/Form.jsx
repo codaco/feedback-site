@@ -52,7 +52,6 @@ class Form extends Component {
   constructor(props) {
     super(props);
     this.submitForm = this.submitForm.bind(this);
-    this.updateState = this.updateState.bind(this);
     // this.methodCallback = this.methodCallback.bind(this);
     this.newMutationSuccessCallback = this.newMutationSuccessCallback.bind(this);
     this.editMutationSuccessCallback = this.editMutationSuccessCallback.bind(this);
@@ -254,26 +253,6 @@ class Form extends Component {
     return document;
   }
 
-  // NOTE: this is not called anymore since we're updating on blur, not on change
-  // whenever the form changes, update its state
-  updateState(e) {
-    // e can sometimes be event, sometims be currentValue
-    // see https://github.com/christianalfoni/formsy-react/issues/203
-    if (e.stopPropagation) {
-      e.stopPropagation();
-    } else {
-      // get rid of empty fields
-      _.forEach(e, (value, key) => {
-        if (_.isEmpty(value)) {
-          delete e[key];
-        }
-      });
-      this.setState(prevState => ({
-        currentValues: e
-      }));
-    }
-  }
-
   // manually update the current values of one or more fields(i.e. on blur). See above for on change instead
   updateCurrentValues(newValues) {
     // keep the previous ones and extend (with possible replacement) with new ones
@@ -311,7 +290,7 @@ class Form extends Component {
   renderErrors() {
     return (
       <div className="form-errors">
-        {this.state.errors.map((error, index) => 
+        {this.state.errors.map((error, index) =>
           <Flash key={index} message={{content: error.message || this.context.intl.formatMessage({id: error.name}, error.data), type: 'error' }}/>
         )}
       </div>

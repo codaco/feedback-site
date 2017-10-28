@@ -13,6 +13,7 @@ import './common/Vote.jsx';
 import './account/SimpleLoginForm.jsx';
 import './account/SimpleSignupForm.jsx';
 import './account/SwitchableLoginForm.jsx';
+import './account/GuestLoginLink.jsx';
 
 // posts
 
