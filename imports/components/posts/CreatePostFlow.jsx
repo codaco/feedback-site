@@ -24,7 +24,7 @@ class CreatePostFlow extends React.Component {
   }
 
   initialStep() {
-    if (!this.props.currentUser || this.props.currentUser.isGuest) {
+    if (!this.props.currentUser) {
       return LOGIN_STEP;
     }
     return SUGGEST_STEP;
