@@ -23,6 +23,7 @@ registerFragment(`
     username
     displayName
     emailHash
+    isAdmin
   }
 `);
 

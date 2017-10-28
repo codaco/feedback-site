@@ -217,4 +217,5 @@ addStrings('en', {
 
   "admin": "Admin",
   "notifications": "Notifications",
+  "admin.flair": "Network Canvas team",
 });

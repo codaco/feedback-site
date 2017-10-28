@@ -26,6 +26,14 @@
   }
 }
 
+.users-flair {
+  font-size: $font-size-small;
+  @include border;
+  @include border-radius;
+  margin-left: 4px;
+  padding: 2px 4px;
+}
+
 .users-newsletter-settings {
   @include flex-center;
   margin-top: $vmargin;
