@@ -5,36 +5,21 @@ import { FormattedMessage } from 'meteor/vulcan:i18n';
 import Button from 'react-bootstrap/lib/Button';
 import DropdownButton from 'react-bootstrap/lib/DropdownButton';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
+import { LinkContainer } from 'react-router-bootstrap';
 import { withRouter } from 'react-router'
 import Categories from 'meteor/vulcan:categories';
 import { withApollo } from 'react-apollo';
 
 class CategoriesList extends PureComponent {
 
-  constructor() {
-    super();
-    this.getCurrentCategoriesArray = this.getCurrentCategoriesArray.bind(this);
-    this.getCategoryLink = this.getCategoryLink.bind(this);
-  }
-
-  getCurrentCategoriesArray() {
-    const currentCategories = _.clone(this.props.location.query.cat);
-    if (currentCategories) {
-      return Array.isArray(currentCategories) ? currentCategories : [currentCategories]
-    } else {
-      return [];
-    }
-  }
-
   getCategoryLink(slug) {
-    const categories = this.getCurrentCategoriesArray();
+    const newQuery = _.clone(this.props.router.location.query);
+    newQuery.cat = slug;
+
     return {
       pathname: '/',
-      query: {
-        ...this.props.location.query,
-        cat: categories.includes(slug) ? _.without(categories, slug) : categories.concat([slug])
-      }
-    }
+      query: newQuery,
+    };
   }
 
   getNestedCategories() {
@@ -59,11 +44,33 @@ class CategoriesList extends PureComponent {
     return nestedCategories;
   }
 
+  renderCategory(category, index) {
+    return (
+      <LinkContainer key={index} to={this.getCategoryLink(category.slug)}>
+        <MenuItem>
+          {category.name}
+        </MenuItem>
+      </LinkContainer>
+    );
+  }
+
+  renderCategories() {
+    if (this.props.loading) {
+      return (<div className="dropdown-item"><MenuItem><Components.Loading /></MenuItem></div>);
+    }
+
+    const nestedCategories = this.getNestedCategories();
+    if (nestedCategories && nestedCategories.length > 0) {
+      return nestedCategories.map((cat, i) => this.renderCategory(cat, i));
+    }
+
+    return null;
+  }
+
   render() {
 
     const allCategoriesQuery = _.clone(this.props.router.location.query);
     delete allCategoriesQuery.cat;
-    const nestedCategories = this.getNestedCategories();
 
     return (
       <div>
@@ -73,20 +80,15 @@ class CategoriesList extends PureComponent {
           title={<FormattedMessage id="categories"/>}
           id="categories-dropdown"
         >
-          <MenuItem href="/" eventKey={0} active={!this.props.router.location.query.cat}>
-            <FormattedMessage id="categories.all"/>
-          </MenuItem>
-          {
-            // categories data are loaded
-            !this.props.loading ?
-              // there are currently categories
-              nestedCategories && nestedCategories.length > 0 ?
-                nestedCategories.map((category, index) => <Components.CategoriesNode key={index} category={category} index={index} openModal={this.openCategoryEditModal}/>)
-              // not any category found
-              : null
-            // categories are loading
-            : <div className="dropdown-item"><MenuItem><Components.Loading /></MenuItem></div>
-          }
+          <LinkContainer
+            active={!this.props.router.location.query.cat}
+            to={{ pathname: "/", query: allCategoriesQuery }}
+          >
+            <MenuItem>
+              <FormattedMessage id="categories.all"/>
+            </MenuItem>
+          </LinkContainer>
+          {this.renderCategories()}
           <Components.ShowIf check={Categories.options.mutations.new.check}>
             <MenuItem divider />
           </Components.ShowIf>
