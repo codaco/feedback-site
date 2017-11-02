@@ -44,9 +44,39 @@ class CategoriesList extends PureComponent {
     return nestedCategories;
   }
 
-  renderCategory(category, index) {
+
+  renderEdit() {
+
+
     return (
-      <LinkContainer key={index} to={this.getCategoryLink(category.slug)}>
+      <ModalTrigger title="Edit Category" component={<a className="edit-category-link"><Components.Icon name="edit"/></a>}>
+        <Components.CategoriesEditForm category={this.props.category}/>
+      </ModalTrigger>
+    )
+  }
+
+  renderEdit(category) {
+    return (
+      <Components.ShowIf
+        check={Categories.options.mutations.edit.check}
+        document={category}
+        key={`${category._id}.edit`}
+      >
+        <MenuItem>
+          <ModalTrigger
+            title="Edit Category"
+            component={<span>{`- edit ${category.name}`}</span>}
+          >
+            <Components.CategoriesEditForm category={category} />
+          </ModalTrigger>
+        </MenuItem>
+      </Components.ShowIf>
+    );
+  }
+
+  renderCategory(category) {
+    return (
+      <LinkContainer key={category._id} to={this.getCategoryLink(category.slug)}>
         <MenuItem>
           {category.name}
         </MenuItem>
@@ -61,7 +91,12 @@ class CategoriesList extends PureComponent {
 
     const nestedCategories = this.getNestedCategories();
     if (nestedCategories && nestedCategories.length > 0) {
-      return nestedCategories.map((cat, i) => this.renderCategory(cat, i));
+      let elements = [];
+      nestedCategories.forEach((category) => {
+        elements.push(this.renderCategory(category));
+        elements.push(this.renderEdit(category));
+      })
+      return elements;
     }
 
     return null;

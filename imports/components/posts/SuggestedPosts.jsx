@@ -85,7 +85,7 @@ class SuggestedPosts extends React.Component {
 
     delay(() => {
       this.setState({ debouncedQuery: query });
-    }, 700 );
+    }, 500 );
   }
 
   handleCreate(event) {
