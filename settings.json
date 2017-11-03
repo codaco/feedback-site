@@ -18,6 +18,8 @@
   },
 
   "defaultEmail": "info@networkcanvas.com",
+  "emailNotifications": true,
+  "enableDevelopmentEmails": true,
   "scoreUpdateInterval": "300",
 
   "postExcerptLength": 30,

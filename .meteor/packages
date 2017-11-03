@@ -15,10 +15,8 @@ vulcan:accounts@1.7.0
 vulcan:categories@1.7.0
 vulcan:forms@1.7.0
 vulcan:i18n-en-us@1.7.0
-#vulcan:base-components
-#vulcan:base-styles@1.7.0
-
-# vendored
+vulcan:notifications@1.7.0
+vulcan:email-templates@1.7.0
 
 networkcanvas-styles
 artwells-accounts-guest

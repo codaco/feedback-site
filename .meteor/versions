@@ -88,11 +88,14 @@ vulcan:admin@1.7.0
 vulcan:categories@1.7.0
 vulcan:comments@1.7.0
 vulcan:core@1.7.0
+vulcan:email@1.7.0
+vulcan:email-templates@1.7.0
 vulcan:events@1.7.0
 vulcan:forms@1.7.0
 vulcan:i18n@1.7.0
 vulcan:i18n-en-us@1.7.0
 vulcan:lib@1.7.0
+vulcan:notifications@1.7.0
 vulcan:posts@1.7.0
 vulcan:routing@1.7.0
 vulcan:users@1.7.0
