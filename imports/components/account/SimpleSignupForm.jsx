@@ -15,7 +15,7 @@ class SimpleSignupForm extends React.Component {
 
   handleChange(field, evt) {
     let value = evt.target.value;
-    if (field !== 'password') {
+    if (field !== 'password' || field !== 'passwordConfirm') {
       value = value.trim();
     }
 
@@ -45,7 +45,7 @@ class SimpleSignupForm extends React.Component {
   }
 
   signUp() {
-    const { username, email, password } = this.state;
+    const { username, email, password, passwordConfirm } = this.state;
 
     let error = false;
     this.clearMessages();
@@ -65,6 +65,9 @@ class SimpleSignupForm extends React.Component {
       error = true;
     } else if (password.length < 8) {
       this.showMessage('Password must be 8 or more characters', 'error');
+      error = true;
+    } else if (passwordConfirm !== password) {
+      this.showMessage('Your password does not match. Please re-enter', 'error');
       error = true;
     }
 
@@ -120,6 +123,15 @@ class SimpleSignupForm extends React.Component {
         required: true,
         defaultValue: this.state.password || "",
         onChange: this.handleChange.bind(this, 'password'),
+      },
+      passwordConfirm: {
+        id: 'passwordConfirm',
+        hint: this.context.intl.formatMessage({ id: 'accounts.confirm_password' }),
+        label: this.context.intl.formatMessage({ id: 'accounts.confirm_password' }),
+        type: 'password',
+        required: true,
+        defaultValue: this.state.password || "",
+        onChange: this.handleChange.bind(this, 'passwordConfirm'),
       },
     };
   }

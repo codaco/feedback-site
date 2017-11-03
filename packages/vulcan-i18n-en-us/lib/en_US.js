@@ -18,6 +18,7 @@ addStrings('en', {
   "accounts.enter_email": "Enter email",
   "accounts.email": "Email",
   "accounts.enter_password": "Enter password",
+  "accounts.confirm_password": "Confirm password",
   "accounts.password": "Password",
   "accounts.choose_password": "Choose password",
   "accounts.change_password": "Change password",
