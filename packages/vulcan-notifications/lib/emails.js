@@ -8,7 +8,7 @@ const Posts = Package['vulcan:posts'] ? Package['vulcan:posts'].default : null;
 const getTestUser = userId => typeof Users.findOne(userId) === "undefined" ? Users.findOne() : Users.findOne(userId);
 
 VulcanEmail.addEmails({
-  
+
   newUser: {
     template: "newUser",
     path: "/email/new-user/:_id?",
@@ -32,21 +32,21 @@ VulcanEmail.addEmails({
 });
 
 if (!!Posts) {
-  
+
   const getTestPost = postId => typeof Posts.findOne(postId) === "undefined" ? {post: Posts.findOne()} : {post: Posts.findOne(postId)};
-  
+
   VulcanEmail.addEmails({
-    
+
     newPost: {
       template: "newPost",
       path: "/email/new-post/:_id?",
       getProperties: Posts.getNotificationProperties,
-      subject({postAuthorName="[postAuthorName]", postTitle="[postTitle]"}) {
-        return postAuthorName+' has created a new post: '+postTitle;
+      subject({postTitle="[postTitle]"}) {
+        return 'New post: '+postTitle;
       },
       getTestObject: getTestPost,
     },
-    
+
     newPendingPost: {
       template: "newPendingPost",
       path: "/email/new-pending-post/:_id?",
@@ -56,7 +56,7 @@ if (!!Posts) {
       },
       getTestObject: getTestPost,
     },
-    
+
     postApproved: {
       template: "postApproved",
       path: "/email/post-approved/:_id?",
@@ -66,14 +66,14 @@ if (!!Posts) {
       },
       getTestObject: getTestPost,
     }
-    
+
   });
-  
+
 }
 
 
 if (!!Comments) {
-    
+
   const getTestComment = commentId => typeof Comments.findOne(commentId) === "undefined" ? {comment: Comments.findOne()} : {comment: Comments.findOne(commentId)};
 
   VulcanEmail.addEmails({
@@ -82,8 +82,8 @@ if (!!Comments) {
       template: "newComment",
       path: "/email/new-comment/:_id?",
       getProperties: Comments.getNotificationProperties,
-      subject({authorName = "[authorName]", postTitle = "[postTitle]"}) {
-        return authorName+' left a new comment on your post "' + postTitle + '"';
+      subject({postTitle = "[postTitle]"}) {
+        return 'New comment on your post "' + postTitle + '"';
       },
       getTestObject: getTestComment,
     },
@@ -92,8 +92,8 @@ if (!!Comments) {
       template: "newReply",
       path: "/email/new-reply/:_id?",
       getProperties: Comments.getNotificationProperties,
-      subject({authorName = "[authorName]", postTitle = "[postTitle]"}) {
-        return authorName+' replied to your comment on "'+postTitle+'"';
+      subject({postTitle = "[postTitle]"}) {
+        return 'New comment on "'+postTitle+'"';
       },
       getTestObject: getTestComment,
     },
@@ -102,12 +102,12 @@ if (!!Comments) {
       template: "newComment",
       path: "/email/new-comment-subscribed/:_id?",
       getProperties: Comments.getNotificationProperties,
-      subject({authorName = "[authorName]", postTitle = "[postTitle]"}) {
-        return authorName+' left a new comment on "' + postTitle + '"';
+      subject({postTitle = "[postTitle]"}) {
+        return 'New comment on "'+postTitle+'"';
       },
       getTestObject: getTestComment,
     }
 
   });
-  
+
 }

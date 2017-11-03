@@ -11,20 +11,6 @@ const notificationsGroup = {
 // Add notifications options to user profile settings
 Users.addField([
   {
-    fieldName: 'notifications_users',
-    fieldSchema: {
-      label: 'New users',
-      type: Boolean,
-      optional: true,
-      defaultValue: false,
-      control: "checkbox",
-      viewableBy: ['guests'],
-      insertableBy: ['admins'],
-      editableBy: ['admins'],
-      group: notificationsGroup,
-    }
-  },
-  {
     fieldName: 'notifications_posts',
     fieldSchema: {
       label: 'New posts',
@@ -59,7 +45,7 @@ if (!!Comments) {
     {
       fieldName: 'notifications_replies',
       fieldSchema: {
-        label: 'Replies to my comments',
+        label: 'Comments on posts I\'ve commented on',
         type: Boolean,
         optional: true,
         defaultValue: false,
@@ -70,5 +56,5 @@ if (!!Comments) {
         group: notificationsGroup,
       }
     }
-  ]);  
+  ]);
 }

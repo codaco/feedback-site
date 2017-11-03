@@ -69,30 +69,24 @@ function CommentsNewNotifications (comment) {
       userIdsNotified.push(post.userId);
     }
 
-    // 2. Notify author of comment being replied to
-    const comments = post.comments
-    if (!!comment.parentCommentId) {
+    // 2. Notify previous commenters of new comment in the thread
+    const comments = Comments.find({ postId: comment.postId }).fetch();
+    comments.forEach((postComment) => {
+      if (postComment.userId !== post.userId && postComment.userId !== comment.userId) {
 
-      const parentComment = Comments.findOne(comment.parentCommentId);
-
-      // do not notify author of parent comment if they're also post author or comment author
-      // (someone could be replying to their own comment)
-      if (parentComment.userId !== post.userId && parentComment.userId !== comment.userId) {
-
-        const parentCommentAuthor = Users.findOne(parentComment.userId);
+        const postCommentAuthor = Users.findOne(postComment.userId);
 
         // do not notify parent comment author if they have reply notifications turned off
-        if (Users.getSetting(parentCommentAuthor, "notifications_replies", false)) {
+        if (Users.getSetting(postCommentAuthor, "notifications_replies", false)) {
 
           // add parent comment to notification data
-          notificationData.parentComment = _.pick(parentComment, '_id', 'userId', 'author', 'htmlBody');
+          notificationData.parentComment = _.pick(postComment, '_id', 'userId', 'author', 'htmlBody');
 
-          createNotification(parentComment.userId, 'newReply', notificationData);
-          userIdsNotified.push(parentComment.userId);
+          createNotification(postComment.userId, 'newReply', notificationData);
+          userIdsNotified.push(postComment.userId);
         }
       }
-
-    }
+    });
 
   }
 }
