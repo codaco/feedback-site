@@ -17,6 +17,7 @@ vulcan:forms@1.7.0
 vulcan:i18n-en-us@1.7.0
 vulcan:notifications@1.7.0
 vulcan:email-templates@1.7.0
+vulcan:subscribe@1.7.0
 
 networkcanvas-styles
 artwells-accounts-guest

@@ -31,6 +31,17 @@ class PostsCommentsThread extends React.Component {
     // TODO: focus input
   }
 
+  renderSubscribeButton() {
+    const user = this.props.currentUser;
+
+    if (user && !user.isGuest) {
+      return (
+        <Components.SubscribeTo document={this.props.post} className="subscribe-button" />
+      );
+    }
+    return null;
+  }
+
   render() {
     const {loading, terms: { postId }, results, totalCount, currentUser} = this.props;
 
@@ -45,7 +56,10 @@ class PostsCommentsThread extends React.Component {
 
       return (
         <div className="posts-comments-thread">
-          <h4 className="posts-comments-thread-title"><FormattedMessage id="comments.comments"/></h4>
+          <h4 className="posts-comments-thread-title">
+            <FormattedMessage id="comments.comments" />
+            {this.renderSubscribeButton()}
+          </h4>
           <Components.CommentsList
             currentUser={currentUser}
             comments={nestedComments}
@@ -71,7 +85,8 @@ class PostsCommentsThread extends React.Component {
 PostsCommentsThread.displayName = 'PostsCommentsThread';
 
 PostsCommentsThread.propTypes = {
-  currentUser: PropTypes.object
+  currentUser: PropTypes.object,
+  post: PropTypes.object,
 };
 
 const options = {

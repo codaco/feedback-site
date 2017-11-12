@@ -27,6 +27,19 @@
   }
 }
 
+.subscribe-button {
+  @extend .btn;
+  @extend .btn-sm;
+
+  @include button-variant($white, $brand-primary, $brand-primary);
+
+  margin-left: 1rem;
+
+  &.subscribed {
+    @include button-variant($white, $gray-light, $gray-light);
+  }
+}
+
 .private{
   text-transform: uppercase;
   font-size: $font-size-small;
