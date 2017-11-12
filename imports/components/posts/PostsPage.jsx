@@ -8,7 +8,7 @@ import { FormattedMessage } from 'meteor/vulcan:i18n';
 class PostsPage extends Component {
 
   render() {
-    if (this.props.loading) {
+    if (this.props.loading && !this.props.document) {
 
       return <div className="posts-page"><Components.Loading/></div>
 

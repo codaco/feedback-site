@@ -43,18 +43,6 @@ addCallback("posts.new.validate", PostsNewRateLimit);
 
 
 /**
- * @summary Check for duplicate links
- */
-function PostsNewDuplicateLinksCheck (post, user) {
-  if(!!post.url && Posts.checkForSameUrl(post.url)) {
-    const DuplicateError = createError('posts.link_already_posted', {message: 'posts.link_already_posted'});
-    throw new DuplicateError({data: {break: true, url: post.url}});
-  }
-  return post;
-}
-addCallback("posts.new.sync", PostsNewDuplicateLinksCheck);
-
-/**
  * @summary Set the post's postedAt if it's going to be approved
  */
 function PostsSetPostedAt (post, user) {
@@ -99,8 +87,8 @@ addCallback("posts.new.sync", PostsNewSlugify);
 function PostsNewHTMLContent (post) {
   if (post.body) {
     // excerpt length is configurable via the settings (30 words by default, ~255 characters)
-    const excerptLength = getSetting('postExcerptLength', 30); 
-    
+    const excerptLength = getSetting('postExcerptLength', 30);
+
     // extend the post document
     post = {
       ...post,
@@ -108,7 +96,7 @@ function PostsNewHTMLContent (post) {
       excerpt: Utils.trimHTML(Utils.sanitize(marked(post.body)), excerptLength),
     };
   }
-  
+
   return post;
 }
 addCallback("posts.new.sync", PostsNewHTMLContent);

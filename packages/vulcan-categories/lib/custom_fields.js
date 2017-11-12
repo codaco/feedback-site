@@ -9,7 +9,7 @@ Posts.addField([
       control: "checkboxgroup",
       optional: true,
       insertableBy: ['members'],
-      editableBy: ['members'],
+      editableBy: ['admins'],
       viewableBy: ['guests'],
       form: {
         noselect: true,

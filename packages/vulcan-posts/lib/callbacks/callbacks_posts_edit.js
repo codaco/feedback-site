@@ -8,17 +8,6 @@ import { runCallbacks, runCallbacksAsync, addCallback, getSetting, Utils } from 
 
 
 /**
- * @summary Check for duplicate links
- */
-function PostsEditDuplicateLinksCheck (modifier, post) {
-  if(post.url !== modifier.$set.url && !!modifier.$set.url) {
-    Posts.checkForSameUrl(modifier.$set.url);
-  }
-  return modifier;
-};
-addCallback("posts.edit.sync", PostsEditDuplicateLinksCheck);
-
-/**
  * @summary Force sticky to default to false when it's not specified
  * (simpleSchema's defaultValue does not work on edit, so do it manually in callback)
  */
@@ -79,8 +68,8 @@ addCallback("posts.edit.sync", PostsEditSlugify);
 function PostsEditHTMLContent (modifier, post) {
   if (modifier.$set && typeof modifier.$set.body !== 'undefined') {
     // excerpt length is configurable via the settings (30 words by default, ~255 characters)
-    const excerptLength = getSetting('postExcerptLength', 30); 
-    
+    const excerptLength = getSetting('postExcerptLength', 30);
+
     // extend the modifier
     modifier.$set = {
       ...modifier.$set,
@@ -95,7 +84,7 @@ function PostsEditHTMLContent (modifier, post) {
       excerpt: true,
     };
   }
-  
+
   return modifier;
 }
 addCallback("posts.edit.sync", PostsEditHTMLContent);

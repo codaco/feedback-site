@@ -51,17 +51,17 @@ const schema = {
   /**
     URL
   */
-  url: {
-    type: String,
-    optional: true,
-    max: 500,
-    viewableBy: ['guests'],
-    insertableBy: ['members'],
-    editableBy: ['members'],
-    control: "url",
-    order: 10,
-    searchable: true
-  },
+  // url: {
+  //   type: String,
+  //   optional: true,
+  //   max: 500,
+  //   viewableBy: ['guests'],
+  //   insertableBy: ['members'],
+  //   editableBy: ['members'],
+  //   control: "url",
+  //   order: 10,
+  //   searchable: true
+  // },
   /**
     Title
   */
