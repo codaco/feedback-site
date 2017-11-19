@@ -29,26 +29,12 @@ Users.addField([
 if (!!Comments) {
   Users.addField([
     {
-      fieldName: 'notifications_comments',
+      fieldName: 'auto_subscribe_posts',
       fieldSchema: {
-        label: 'Comments on my posts',
+        label: 'Subscribe to comments on my posts',
         type: Boolean,
         optional: true,
-        defaultValue: false,
-        control: "checkbox",
-        viewableBy: ['guests'],
-        insertableBy: ['members'],
-        editableBy: ['members'],
-        group: notificationsGroup,
-      }
-    },
-    {
-      fieldName: 'notifications_replies',
-      fieldSchema: {
-        label: 'Comments on posts I\'ve commented on',
-        type: Boolean,
-        optional: true,
-        defaultValue: false,
+        defaultValue: true,
         control: "checkbox",
         viewableBy: ['guests'],
         insertableBy: ['members'],

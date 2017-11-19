@@ -1,6 +1,7 @@
 import { createNotification } from 'meteor/vulcan:notifications';
 import Users from 'meteor/vulcan:users';
 import { addCallback } from 'meteor/vulcan:core';
+import { performSubscriptionAction } from './mutations';
 
 // TODO: don't import these callbacks server-side (reduce bundle size of what's sent to the client)
 // note: even if all these callbacks are async, they are imported on the client so they pop in the cheatsheet when debug is enabled
@@ -9,6 +10,21 @@ import { addCallback } from 'meteor/vulcan:core';
 const Comments = Package['vulcan:comments'] ? Package['vulcan:comments'].default : null;
 const Posts = Package['vulcan:posts'] ? Package['vulcan:posts'].default : null;
 const Categories = Package['vulcan:categories'] ? Package['vulcan:categories'].default : null;
+
+/**
+ * @summary Automatically subscribe a user to their own posts if their user settings permit
+ */
+function AutoSubscribeUser(post) {
+  if (Meteor.isServer) {
+    const user = Users.findOne({ _id: post.userId, 'auto_subscribe_posts': true });
+
+    if (user && !Users.isGuest(user)) {
+      console.log(`Subscribing user ${user._id} to own post`)
+
+      performSubscriptionAction("subscribe", Posts, post._id, user);
+    }
+  }
+}
 
 /**
  * @summary Notify users subscribed to 'another user' whenever another user posts
@@ -31,9 +47,9 @@ function SubscribedCategoriesNotifications (post) {
     };
 
     if (!!subscribers && !!subscribers.length) {
-      // remove userIds of users that have already been notified and of post's author 
+      // remove userIds of users that have already been notified and of post's author
       let subscriberIdsToNotify = _.uniq(_.difference(subscribers, userIdsNotified, [post.userId]));
-      
+
       createNotification(subscriberIdsToNotify, 'newPost', notificationData);
 
       userIdsNotified = userIdsNotified.concat(subscriberIdsToNotify);
@@ -81,9 +97,9 @@ function SubscribedUsersNotifications (post) {
     const user = Users.findOne({_id: post.userId});
 
     if (!!user.subscribers && !!user.subscribers.length) {
-      // remove userIds of users that have already been notified and of post's author 
+      // remove userIds of users that have already been notified and of post's author
       let subscriberIdsToNotify = _.difference(user.subscribers, userIdsNotified, [user._id]);
-      
+
       createNotification(subscriberIdsToNotify, 'newPost', notificationData);
 
       userIdsNotified = userIdsNotified.concat(subscriberIdsToNotify);
@@ -97,6 +113,7 @@ if (!!Posts && !!Comments) {
 
 if (!!Posts) {
   addCallback("posts.new.async", SubscribedUsersNotifications);
+  addCallback("posts.new.async", AutoSubscribeUser);
 }
 
 if (!!Posts && !!Categories) {

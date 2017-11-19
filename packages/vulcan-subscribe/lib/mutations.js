@@ -28,11 +28,6 @@ const prepareSubscription = (action, collection, itemId, user) => {
     if (item._id === user._id) {
       return false;
     }
-  } else {
-    // the item's owner is the subscriber, abort process
-    if (item.userId && item.userId === user._id) {
-      return false;
-    }
   }
 
   // assign the right fields depending on the collection
@@ -73,7 +68,7 @@ const prepareSubscription = (action, collection, itemId, user) => {
  * @param {Object} user: current user (xxx: legacy, to replace with this.userId)
  * @returns {Boolean}
  */
-const performSubscriptionAction = (action, collection, itemId, user) => {
+export const performSubscriptionAction = (action, collection, itemId, user) => {
 
   // subscription preparation to verify if can pursue and give shorthand variables
   const subscription = prepareSubscription(action, collection, itemId, user);
@@ -124,7 +119,7 @@ const performSubscriptionAction = (action, collection, itemId, user) => {
     });
 
     const updatedUser = Users.findOne({_id: user._id}, {fields: {_id:1, subscribedItems: 1}});
-    
+
     return updatedUser;
   } else {
     throw Error(Utils.encodeIntlError({id: 'app.something_bad_happened'}))
@@ -141,26 +136,26 @@ const performSubscriptionAction = (action, collection, itemId, user) => {
    const genericMutationFunction = (collectionName, action) => {
      // return the method code
      return function(root, { documentId }, context) {
-       
+
        // extract the current user & the relevant collection from the graphql server context
        const { currentUser, [Utils.capitalize(collectionName)]: collection } = context;
-       
+
        // permission check
        if (!Users.canDo(context.currentUser, `${collectionName}.${action}`)) {
          throw new Error(Utils.encodeIntlError({id: "app.noPermission"}));
        }
-       
+
        // do the actual subscription action
        return performSubscriptionAction(action, collection, documentId, currentUser);
      };
    };
 
    const collectionName = collection._name;
-   
+
    // add mutations to the schema
    addGraphQLMutation(`${collectionName}Subscribe(documentId: String): User`),
    addGraphQLMutation(`${collectionName}Unsubscribe(documentId: String): User`);
-   
+
    // create an object of the shape expected by mutations resolvers
    addGraphQLResolvers({
      Mutation: {
@@ -168,8 +163,8 @@ const performSubscriptionAction = (action, collection, itemId, user) => {
        [`${collectionName}Unsubscribe`]: genericMutationFunction(collectionName, 'unsubscribe'),
      },
    });
-   
-   
+
+
  };
 
 // Finally. Add the mutations to the Meteor namespace 🖖

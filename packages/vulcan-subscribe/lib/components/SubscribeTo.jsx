@@ -16,10 +16,26 @@ class SubscribeToActionHandler extends PureComponent {
     super(props, context);
 
     this.onSubscribe = this.onSubscribe.bind(this);
+    this.updateSubscribed = this.updateSubscribed.bind(this);
 
     this.state = {
       subscribed: !!Users.isSubscribedTo(props.currentUser, props.document, props.documentType),
     };
+  }
+
+  componentDidMount() {
+    console.log("updating onMount");
+    this.updateSubscribed();
+    setTimeout(this.updateSubscribed, 2000);
+  }
+
+  updateSubscribed() {
+    const isSubscribed = !!Users.isSubscribedTo(this.props.currentUser, this.props.document, this.props.documentType);
+    console.log("isSubscribed", isSubscribed);
+
+    this.setState({
+      subscribed: isSubscribed,
+    })
   }
 
   async onSubscribe(e) {
@@ -54,8 +70,8 @@ class SubscribeToActionHandler extends PureComponent {
 
     const action = `${documentType}.${getSubscribeAction(subscribed)}`;
 
-    // can't subscribe to yourself or to own post (also validated on server side)
-    if (!currentUser || !document || (documentType === 'posts' && document.userId === currentUser._id) || (documentType === 'users' && document._id === currentUser._id)) {
+    // can't subscribe to yourself
+    if (!currentUser || !document || (documentType === 'users' && document._id === currentUser._id)) {
       return null;
     }
 
