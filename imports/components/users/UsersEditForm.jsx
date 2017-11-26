@@ -5,40 +5,59 @@ import { FormattedMessage, intlShape } from 'meteor/vulcan:i18n';
 import Users from 'meteor/vulcan:users';
 import { STATES } from 'meteor/vulcan:accounts';
 
-const UsersEditForm = (props, context) => {
-  return (
-    <Components.ShowIf
-      check={Users.options.mutations.edit.check}
-      document={props.terms.documentId ? {_id: props.terms.documentId} : {slug: props.terms.slug}}
-      failureComponent={<FormattedMessage id="app.noPermission"/>}
-    >
-      <div className="page users-edit-form">
-        <h2 className="page-title users-edit-form-title"><FormattedMessage id="users.edit_account"/></h2>
+class UsersEditForm extends React.Component {
+  constructor(props) {
+    super(props);
 
-        <div className="change-password-link">
-          <Components.ModalTrigger size="small" title={context.intl.formatMessage({id: "accounts.change_password"})} component={<a href="#"><FormattedMessage id="accounts.change_password" /></a>}>
-            <Components.AccountsLoginForm formState={STATES.PASSWORD_CHANGE} />
-          </Components.ModalTrigger>
-        </div>
+    this.state = {
+      username: props.terms && props.terms.slug
+    }
+  }
 
-        <div className="form-group row">
-          <label className="control-label col-sm-3">Username</label>
-          <div className="col-sm-9">
-            {Users.getUserNameById(props.terms.documentId)}
+  componentDidMount() {
+    if (!this.props.terms.slug) {
+      this.setState({
+        username: Users.getUserNameById(this.props.terms.documentId)
+      });
+    }
+  }
+
+  render() {
+    return (
+      <Components.ShowIf
+        check={Users.options.mutations.edit.check}
+        document={this.props.terms.documentId ? { _id: this.props.terms.documentId } : { slug: this.props.terms.slug }}
+        failureComponent={<FormattedMessage id="app.noPermission" />}
+      >
+        <div className="page users-edit-form">
+          <h2 className="page-title users-edit-form-title"><FormattedMessage id="users.edit_account" /></h2>
+
+          <div className="change-password-link">
+            <Components.ModalTrigger size="small" title={this.context.intl.formatMessage({ id: "accounts.change_password" })} component={<a href="#"><FormattedMessage id="accounts.change_password" /></a>}>
+              <Components.AccountsLoginForm formState={STATES.PASSWORD_CHANGE} />
+            </Components.ModalTrigger>
           </div>
-        </div>
 
-        <Components.SmartForm
-          collection={Users}
-          {...props.terms}
-          successCallback={user => {
-            props.flash(context.intl.formatMessage({ id: 'users.edit_success' }, {name: Users.getDisplayName(user)}), 'success')
-          }}
-          showRemove={true}
-        />
-      </div>
-    </Components.ShowIf>
-  );
+          <div className="form-group row">
+            <label className="control-label col-sm-3">Username</label>
+            <div className="col-sm-9">
+              {this.state.username}
+            </div>
+          </div>
+
+          <Components.SmartForm
+            collection={Users}
+            {...this.props.terms}
+            successCallback={user => {
+              this.props.flash(this.context.intl.formatMessage({ id: 'users.edit_success' }, { name: Users.getDisplayName(user) }), 'success')
+            }}
+            showRemove={true}
+          />
+        </div>
+      </Components.ShowIf>
+    );
+  }
+
 };
 
 
