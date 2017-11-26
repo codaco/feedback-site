@@ -25,6 +25,18 @@ class PostsCommentsThread extends React.Component {
     return "";
   }
 
+  componentDidMount() {
+    if (this.props.currentUser &&
+        this.props.post.userId == this.props.currentUser._id) {
+      // Ugly hack- refetch own posts after initial load because auto-subscribing to self
+      // posts happens async. Must refetch to get correct status for subscribe button after initially
+      // creating a post.
+      setTimeout(() => {
+        this.props.refetchUser();
+      }, 500);
+    }
+  }
+
   handleNewComment(replyComment = {}) {
     this.setState({ replyComment });
     window.scrollBy(0, 9999);   // Just scroll to the bottom of the page

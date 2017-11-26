@@ -16,26 +16,10 @@ class SubscribeToActionHandler extends PureComponent {
     super(props, context);
 
     this.onSubscribe = this.onSubscribe.bind(this);
-    this.updateSubscribed = this.updateSubscribed.bind(this);
 
     this.state = {
       subscribed: !!Users.isSubscribedTo(props.currentUser, props.document, props.documentType),
     };
-  }
-
-  componentDidMount() {
-    console.log("updating onMount");
-    this.updateSubscribed();
-    setTimeout(this.updateSubscribed, 2000);
-  }
-
-  updateSubscribed() {
-    const isSubscribed = !!Users.isSubscribedTo(this.props.currentUser, this.props.document, this.props.documentType);
-    console.log("isSubscribed", isSubscribed);
-
-    this.setState({
-      subscribed: isSubscribed,
-    })
   }
 
   async onSubscribe(e) {
