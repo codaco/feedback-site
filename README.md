@@ -37,7 +37,7 @@ Open the Meteor shell:
 
 Then find and modify users:
 
-    let Users = require('meteor/vulcan:users').default
+    const Users = require('meteor/vulcan:users').default
     let u = Users.findOne({username: 'usermcuser'})   // or {email: 'xxxxx'}
 
 Remove old guest accounts:
