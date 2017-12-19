@@ -63,7 +63,7 @@ addStrings('en', {
   "posts.view": "View",
   "posts.top": "Top",
   "posts.new": "New",
-  "posts.best": "Best",
+  "posts.best": "Highest Rating",
   "posts.pending": "Pending",
   "posts.rejected": "Rejected",
   "posts.scheduled": "Scheduled",
