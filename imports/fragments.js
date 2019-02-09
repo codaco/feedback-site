@@ -1,11 +1,11 @@
 import { registerFragment, extendFragment } from 'meteor/vulcan:core';
 import { getFragment } from 'meteor/vulcan:lib';
 
-extendFragment('UsersAdmin', `
-  posts {
-    ...PostsPage
-  }
-  `);
+// extendFragment('UsersAdmin', `
+//   posts {
+//     ...PostsPage
+//   }
+//   `);
 
 // ------------------------------ Vote ------------------------------ //
 
