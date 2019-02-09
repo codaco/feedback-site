@@ -1,4 +1,11 @@
-import { registerFragment, getFragment } from 'meteor/vulcan:core';
+import { registerFragment, extendFragment } from 'meteor/vulcan:core';
+import { getFragment } from 'meteor/vulcan:lib';
+
+extendFragment('UsersAdmin', `
+  posts {
+    ...PostsPage
+  }
+  `);
 
 // ------------------------------ Vote ------------------------------ //
 
@@ -116,14 +123,14 @@ registerFragment(`
       ...UsersMinimumInfo
     }
     # vulcan:voting
-    upvoters {
-      _id
-    }
-    downvoters {
-      _id
-    }
-    upvotes
-    downvotes
+    #upvoters {
+    #  _id
+    #}
+    #downvoters {
+    #  _id
+    #}
+   # upvotes
+    #downvotes
     baseScore
     score
   }
@@ -134,6 +141,7 @@ registerFragment(`
     ...PostsList
   }
 `);
+
 
 
 // ----------------------------- Comments ------------------------------ //
@@ -162,14 +170,14 @@ registerFragment(`
       }
     }
     # vulcan:voting
-    upvoters {
-      _id
-    }
-    downvoters {
-      _id
-    }
-    upvotes
-    downvotes
+    #upvoters {
+   #   _id
+   # }
+    #downvoters {
+    #  _id
+   # }
+   # upvotes
+   # downvotes
     baseScore
     score
   }
