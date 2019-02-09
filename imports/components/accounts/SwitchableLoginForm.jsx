@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import PropTypes from 'prop-types';
-import { Components, registerComponent } from 'meteor/vulcan:core';
+import { Components, replaceComponent, withCurrentUser } from 'meteor/vulcan:core';
 
 const LOGIN_MODE = "login";
 const SIGNUP_MODE = "signup";
@@ -87,4 +87,4 @@ SwitchableLoginForm.propTypes = {
   onComplete: PropTypes.func,
 }
 
-registerComponent('SwitchableLoginForm', SwitchableLoginForm);
+replaceComponent('AccountsLoginForm', SwitchableLoginForm);
