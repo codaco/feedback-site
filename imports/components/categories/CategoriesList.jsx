@@ -2,9 +2,6 @@ import { ModalTrigger, Components, registerComponent, withList, Utils } from "me
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'meteor/vulcan:i18n';
-import Button from 'react-bootstrap/lib/Button';
-import DropdownButton from 'react-bootstrap/lib/DropdownButton';
-import MenuItem from 'react-bootstrap/lib/MenuItem';
 import { LinkContainer } from 'react-router-bootstrap';
 import { withRouter } from 'react-router'
 import Categories from 'meteor/vulcan:categories';
@@ -46,7 +43,6 @@ class CategoriesList extends PureComponent {
 
 
   renderEdit() {
-
 
     return (
       <ModalTrigger title="Edit Category" component={<a className="edit-category-link"><Components.Icon name="edit"/></a>}>
@@ -107,38 +103,24 @@ class CategoriesList extends PureComponent {
     const allCategoriesQuery = _.clone(this.props.router.location.query);
     delete allCategoriesQuery.cat;
 
-    return (
-      <div>
-        <DropdownButton
-          bsStyle="default"
-          className="categories-list btn-secondary"
-          title={<FormattedMessage id="categories"/>}
-          id="categories-dropdown"
-        >
-          <LinkContainer
-            active={!this.props.router.location.query.cat}
-            to={{ pathname: "/", query: allCategoriesQuery }}
-          >
-            <MenuItem>
-              <FormattedMessage id="categories.all"/>
-            </MenuItem>
-          </LinkContainer>
-          {this.renderCategories()}
-          <Components.ShowIf check={Categories.options.mutations.new.check}>
-            <MenuItem divider />
-          </Components.ShowIf>
-          <Components.ShowIf check={Categories.options.mutations.new.check}>
-            <MenuItem eventKey="edit">
-              <ModalTrigger title={<FormattedMessage id="categories.new"/>} component={<Button bsStyle="primary"><FormattedMessage id="categories.new"/></Button>}>
-                <Components.CategoriesNewForm/>
-              </ModalTrigger>
-            </MenuItem>
-          </Components.ShowIf>
-        </DropdownButton>
-
-      </div>
-    )
-
+      return (
+              <Components.Dropdown
+                  buttonProps={{ variant: 'default', title: <FormattedMessage id="categories"/> }}
+                  id="categories-list"
+                  className="views"
+                  labelId={'posts.view'}
+                  menuItems={[
+                      ...views.map(view => ({
+                          to: { pathname: Utils.getRoutePath('posts.list'), query: { ...query, view: view } },
+                          labelId: `posts.${view}`,
+                      })),
+                      {
+                          to: `/daily`,
+                          labelId: `posts.daily`,
+                      },
+                  ]}
+              />
+      );
   }
 }
 
