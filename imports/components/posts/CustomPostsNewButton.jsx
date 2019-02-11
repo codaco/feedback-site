@@ -1,9 +1,3 @@
-/*
-The original Logo components is defined using React's
-functional stateless component syntax, so we redefine
-it the same way.
-*/
-
 import React from 'react';
 import {Components, replaceComponent} from 'meteor/vulcan:core';
 import {FormattedMessage, intlShape} from "meteor/vulcan:i18n";

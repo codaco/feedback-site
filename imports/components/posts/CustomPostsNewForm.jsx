@@ -45,7 +45,9 @@ const CustomPostsNewForm = (props, context) =>
                 successCallback={post => {
                     props.closeModal();
                     props.router.push({pathname: props.redirect || Posts.getPageUrl(post)});
-                    props.flash(context.intl.formatMessage({id: "posts.created_message"}), "success");
+                    // props.flash(context.intl.formatMessage({id: "posts.created_message"}), "success");
+                    props.flash({ id: 'posts.created_message', type: 'success'});
+
                 }}
             />
         </div>
