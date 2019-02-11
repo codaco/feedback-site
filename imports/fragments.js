@@ -1,11 +1,4 @@
-import { registerFragment, extendFragment } from 'meteor/vulcan:core';
-import { getFragment } from 'meteor/vulcan:lib';
-
-// extendFragment('UsersAdmin', `
-//   posts {
-//     ...PostsPage
-//   }
-//   `);
+import { registerFragment, getFragment, extendFragment } from 'meteor/vulcan:core';
 
 // ------------------------------ Vote ------------------------------ //
 
@@ -30,7 +23,6 @@ registerFragment(`
     username
     displayName
     emailHash
-    isAdmin
   }
 `);
 
@@ -50,18 +42,18 @@ registerFragment(`
     # vulcan:comments
     commentCount
     # vulcan:voting
-    downvotedComments {
-      ...VotedItem
-    }
-    downvotedPosts {
-      ...VotedItem
-    }
-    upvotedComments {
-      ...VotedItem
-    }
-    upvotedPosts {
-      ...VotedItem
-    }
+    #downvotedComments {
+    #  ...VotedItem
+    #}
+    #downvotedPosts {
+    #  ...VotedItem
+    #}
+    #upvotedComments {
+    #  ...VotedItem
+    #}
+    #upvotedPosts {
+    #  ...VotedItem
+    #}
   }
 `);
 
@@ -93,11 +85,12 @@ registerFragment(`
 
 // ------------------------------ Posts ------------------------------ //
 
-registerFragment(`
+extendFragment(`
   fragment PostsList on Post {
     # vulcan:posts
     _id
     title
+    url
     slug
     postedAt
     createdAt
@@ -128,8 +121,8 @@ registerFragment(`
     #}
     #downvoters {
     #  _id
-    #}
-   # upvotes
+   # }
+    #upvotes
     #downvotes
     baseScore
     score
@@ -141,7 +134,6 @@ registerFragment(`
     ...PostsList
   }
 `);
-
 
 
 // ----------------------------- Comments ------------------------------ //
@@ -171,13 +163,16 @@ registerFragment(`
     }
     # vulcan:voting
     #upvoters {
-   #   _id
-   # }
-    #downvoters {
     #  _id
+    #}
+    #downvoters {
+   #   _id
    # }
    # upvotes
    # downvotes
+    #voters {
+     # _id
+    #}
     baseScore
     score
   }
