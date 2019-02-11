@@ -3,8 +3,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'meteor/vulcan:i18n';
 import { LinkContainer } from 'react-router-bootstrap';
-import { withRouter } from 'react-router'
-import Categories from 'meteor/vulcan:categories';
+import { withRouter } from 'react-router';
+import { Categories } from 'meteor/example-forum';
 import { withApollo } from 'react-apollo';
 
 class CategoriesList extends PureComponent {
