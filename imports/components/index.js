@@ -7,6 +7,7 @@ import './accounts/GuestLoginLink.jsx';
 
 // common
 
+import './common/CustomLayout';
 import './common/CustomFooter.jsx';
 import './common/CustomHeader.jsx';
 // import './common/CustomVote.jsx';
@@ -22,6 +23,8 @@ import './posts/CustomPostCommenters';
 import './posts/CustomPostsItem';
 import './posts/CustomPostsListHeader';
 import './posts/CustomPostsNewForm';
+import './posts/CustomPostsNewButton';
+
 
 
 
