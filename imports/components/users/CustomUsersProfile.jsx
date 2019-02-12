@@ -21,7 +21,7 @@ class CustomUsersProfile extends React.Component {
     }
 
     renderContactInfo() {
-        console.log(this.user);
+        //console.log(this.user);
         if (!this.user || !this.user.contactInfo) { return null; }
 
         return (
