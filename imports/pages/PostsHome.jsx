@@ -8,6 +8,6 @@ const PostsHome = (props, context) => {
 
 PostsHome.displayName = "PostsHome";
 
-registerComponent('PostsHome', PostsHome);
+// registerComponent('PostsHome', PostsHome);
 
 export default PostsHome;
