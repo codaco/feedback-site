@@ -1,10 +1,15 @@
-
 # base vulcan package for comments, posting, all forum functions:
 example-forum
+fourseven:scss@4.10.0
 
 # see http://docs.vulcanjs.org/packages
 
 vulcan:core
+# vulcan:admin
+# subscribe and notifications manually imported
+vulcan:notifications
+vulcan:subscribe
+dynamic-import
 
 ############ Language Packages ############
 
@@ -18,8 +23,6 @@ accounts-password@1.5.1
 
 ############ Your Packages ############
 
-
-# custom
 artwells-accounts-guest-custom
 accounts-ui
-# networkcanvas-styles
+networkcanvas-styles
