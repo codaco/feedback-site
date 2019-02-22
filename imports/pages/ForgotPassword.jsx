@@ -108,3 +108,4 @@ ForgotPassword.contextTypes = {
 ForgotPassword.displayName = 'ForgotPassword';
 
 export default ForgotPassword;
+// registerComponent('ForgotPassword', ForgotPassword);

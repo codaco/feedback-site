@@ -1,8 +1,10 @@
 import Users from "meteor/vulcan:users";
 
 // note: leverage weak dependencies on packages
-const Posts = Package['vulcan:posts'] ? Package['vulcan:posts'].default : null;
-const Categories = Package['vulcan:categories'] ? Package['vulcan:categories'].default : null;
+// const Posts = Package['vulcan:posts'] ? Package['vulcan:posts'].default : null;
+// const Categories = Package['vulcan:categories'] ? Package['vulcan:categories'].default : null;
+
+import {Posts, Categories} from "meteor/example-forum";
 
 Users.addField([
   {

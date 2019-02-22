@@ -7,6 +7,6 @@ const UsersSingle = (props, context) => {
 
 UsersSingle.displayName = "UsersSingle";
 
-registerComponent('UsersSingle', UsersSingle);
+// registerComponent('UsersSingle', UsersSingle);
 
 export default UsersSingle;

@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { intlShape } from 'meteor/vulcan:i18n';
-import { Components, registerComponent, getFragment, withMessages } from 'meteor/vulcan:core';
-import Categories from "meteor/vulcan:categories";
+import { Components, registerComponent, withMessages } from 'meteor/vulcan:core';
+import { getFragment } from 'meteor/vulcan:lib';
+import { Categories } from "meteor/example-forum";
 
 const CategoriesNewForm = (props, context) => {
 

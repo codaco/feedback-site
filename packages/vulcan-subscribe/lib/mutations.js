@@ -174,14 +174,15 @@ subscribeMutationsGenerator(Users);
 
 
 // note: leverage weak dependencies on packages
-const Posts = Package['vulcan:posts'] ? Package['vulcan:posts'].default : null;
+// const Posts = Package['vulcan:posts'] ? Package['vulcan:posts'].default : null;
 // check if vulcan:posts exists, if yes, add the mutations to Posts
+import { Posts, Categories } from 'meteor/example-forum';
 if (!!Posts) {
   subscribeMutationsGenerator(Posts);
 }
 
 // check if vulcan:categories exists, if yes, add the mutations to Categories
-const Categories = Package['vulcan:categories'] ? Package['vulcan:categories'].default : null;
+// const Categories = Package['vulcan:categories'] ? Package['vulcan:categories'].default : null;
 if (!!Categories) {
   subscribeMutationsGenerator(Categories);
 }

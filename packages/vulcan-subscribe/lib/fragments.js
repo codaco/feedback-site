@@ -1,5 +1,6 @@
-import { extendFragment } from 'meteor/vulcan:core';
+import { extendFragment, registerFragment } from 'meteor/vulcan:core';
 
-extendFragment('UsersCurrent', `
-  subscribedItems
-`);
+extendFragment(`
+  fragment UsersCurrent on User {
+    subscribedItems
+  }`);

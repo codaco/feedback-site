@@ -1,4 +1,4 @@
-import { createNotification } from 'meteor/vulcan:notifications';
+import { createNotification } from 'meteor/example-forum';
 import Users from 'meteor/vulcan:users';
 import { addCallback } from 'meteor/vulcan:core';
 import { performSubscriptionAction } from './mutations';
@@ -7,9 +7,10 @@ import { performSubscriptionAction } from './mutations';
 // note: even if all these callbacks are async, they are imported on the client so they pop in the cheatsheet when debug is enabled
 
 // note: leverage weak dependencies on packages
-const Comments = Package['vulcan:comments'] ? Package['vulcan:comments'].default : null;
-const Posts = Package['vulcan:posts'] ? Package['vulcan:posts'].default : null;
-const Categories = Package['vulcan:categories'] ? Package['vulcan:categories'].default : null;
+// const Comments = Package['vulcan:comments'] ? Package['vulcan:comments'].default : null;
+// const Posts = Package['vulcan:posts'] ? Package['vulcan:posts'].default : null;
+// const Categories = Package['vulcan:categories'] ? Package['vulcan:categories'].default : null;
+import {Comments, Posts, Categories} from "meteor/example-forum";
 
 /**
  * @summary Automatically subscribe a user to their own posts if their user settings permit

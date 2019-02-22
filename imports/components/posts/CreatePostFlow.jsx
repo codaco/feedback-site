@@ -1,8 +1,7 @@
 import React from 'react';
 import { Components, registerComponent, getComponent, withCurrentUser } from 'meteor/vulcan:core';
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router';
 import Users from 'meteor/vulcan:users';
-import {Button} from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 const LOGIN_STEP = 'login';
